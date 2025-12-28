@@ -6,18 +6,70 @@
   <title>Sri Nagamma Temple</title>
 
   <style>
-    body { font-family: 'Segoe UI', sans-serif; margin:0; background:#fffaf3; color:#3b2f2f; }
-    header { background:#800000; color:#fff; padding:20px; text-align:center; }
-    nav { background:#d4a017; display:flex; justify-content:center; flex-wrap:wrap; }
-    nav a { color:#fff; padding:10px 15px; text-decoration:none; }
-    nav a:hover { background:#b8860b; }
-    section { padding:30px; }
-    h1,h2 { color:#800000; }
-    footer { background:#3b2f2f; color:#fff; text-align:center; padding:15px; }
-    .donate-btn { background:#800000; color:#fff; padding:10px 20px; border-radius:5px; text-decoration:none; }
-    .lang-btn { background:#d4a017; color:#fff; border:none; padding:6px 12px; border-radius:5px; cursor:pointer; }
-    .gallery { display:flex; flex-wrap:wrap; justify-content:center; }
-    .gallery img { width:220px; height:150px; margin:10px; border-radius:10px; object-fit:cover; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #fffaf3;
+      color: #3b2f2f;
+    }
+
+    header {
+      background: #800000;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background: #d4a017;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #fff;
+      padding: 10px 15px;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      background: #b8860b;
+    }
+
+    section {
+      padding: 30px;
+    }
+
+    h1, h2 {
+      color: #800000;
+    }
+
+    footer {
+      background: #3b2f2f;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+    }
+
+    .donate-btn {
+      background: #800000;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .lang-btn {
+      background: #d4a017;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
   </style>
 </head>
 
@@ -32,14 +84,20 @@
 <nav>
   <a href="#about" id="nav-about">About</a>
   <a href="#rituals" id="nav-rituals">Rituals</a>
-  <a href="#gallery" id="nav-gallery">Gallery</a>
   <a href="#donate" id="nav-donate">Donations</a>
   <a href="#contact" id="nav-contact">Contact</a>
 </nav>
 
+<section id="about">
+  <h2 id="about-title">About the Temple</h2>
+  <p id="about-text">
+    Sri Nagamma Temple is a sacred shrine dedicated to Goddess Nagamma, symbolizing protection and prosperity.
+  </p>
+</section>
+
 <section id="rituals">
-  <h2>Daily Rituals & Timings</h2>
-  <ul>
+  <h2 id="rituals-title">Daily Rituals & Timings</h2>
+  <ul id="rituals-list">
     <li>Suprabhata Seva – 6 AM</li>
     <li><strong>Abhishekam – 6 AM (Tuesday, Friday & Sunday)</strong></li>
     <li>Evening Aarti – 6 PM</li>
@@ -47,10 +105,19 @@
 </section>
 
 <section id="donate">
-  <h2>Donations</h2>
-  <a class="donate-btn" href="upi://pay?pa=8328572062@ybl&pn=Sri%20Nagamma%20Temple&cu=INR">
+  <h2 id="donate-title">Donations</h2>
+  <a class="donate-btn"
+     href="upi://pay?pa=8328572062@ybl&pn=Sri%20Nagamma%20Temple&cu=INR">
     💰 Donate via UPI
   </a>
+</section>
+
+<section id="contact">
+  <h2 id="contact-title">Contact Us</h2>
+  <p id="contact-text">
+    Sri Nagamma Temple, Sadum (Thimmanayanapalli), Andhra Pradesh<br>
+    📞 +91-8328572062
+  </p>
 </section>
 
 <footer>
@@ -58,10 +125,63 @@
 </footer>
 
 <script>
-  let telugu=false;
-  function switchLanguage(){
-    telugu=!telugu;
-    document.getElementById("title").innerText = telugu ? "🕉️ శ్రీ నాగమ్మ ఆలయం" : "🕉️ Sri Nagamma Temple";
+  let telugu = false;
+
+  function switchLanguage() {
+    telugu = !telugu;
+
+    if (telugu) {
+      // TELUGU
+      document.getElementById("title").innerText = "🕉️ శ్రీ నాగమ్మ ఆలయం";
+      document.getElementById("subtitle").innerText = "దైవిక శక్తి మరియు రక్షణ ఆలయం";
+
+      document.getElementById("nav-about").innerText = "గురించి";
+      document.getElementById("nav-rituals").innerText = "దినచర్యలు";
+      document.getElementById("nav-donate").innerText = "దానం";
+      document.getElementById("nav-contact").innerText = "సంప్రదించండి";
+
+      document.getElementById("about-title").innerText = "ఆలయం గురించి";
+      document.getElementById("about-text").innerText =
+        "శ్రీ నాగమ్మ ఆలయం దైవిక రక్షణ మరియు శ్రేయస్సుకు ప్రతీక.";
+
+      document.getElementById("rituals-title").innerText = "రోజువారీ సేవలు & సమయాలు";
+      document.getElementById("rituals-list").innerHTML = `
+        <li>సుప్రభాత సేవ – ఉదయం 6 గంటలకు</li>
+        <li><strong>అభిషేకం – ఉదయం 6 గంటలకు (మంగళవారం, శుక్రవారం & ఆదివారం)</strong></li>
+        <li>సాయంత్రం హారతి – సాయంత్రం 6 గంటలకు</li>
+      `;
+
+      document.getElementById("donate-title").innerText = "దానం";
+      document.getElementById("contact-title").innerText = "సంప్రదించండి";
+
+      document.querySelector(".lang-btn").innerText = "🌐 English";
+
+    } else {
+      // ENGLISH
+      document.getElementById("title").innerText = "🕉️ Sri Nagamma Temple";
+      document.getElementById("subtitle").innerText = "Abode of Divine Energy & Protection";
+
+      document.getElementById("nav-about").innerText = "About";
+      document.getElementById("nav-rituals").innerText = "Rituals";
+      document.getElementById("nav-donate").innerText = "Donations";
+      document.getElementById("nav-contact").innerText = "Contact";
+
+      document.getElementById("about-title").innerText = "About the Temple";
+      document.getElementById("about-text").innerText =
+        "Sri Nagamma Temple is a sacred shrine dedicated to Goddess Nagamma, symbolizing protection and prosperity.";
+
+      document.getElementById("rituals-title").innerText = "Daily Rituals & Timings";
+      document.getElementById("rituals-list").innerHTML = `
+        <li>Suprabhata Seva – 6 AM</li>
+        <li><strong>Abhishekam – 6 AM (Tuesday, Friday & Sunday)</strong></li>
+        <li>Evening Aarti – 6 PM</li>
+      `;
+
+      document.getElementById("donate-title").innerText = "Donations";
+      document.getElementById("contact-title").innerText = "Contact Us";
+
+      document.querySelector(".lang-btn").innerText = "🌐 తెలుగు";
+    }
   }
 </script>
 
