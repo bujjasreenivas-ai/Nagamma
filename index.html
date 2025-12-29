@@ -220,7 +220,6 @@ document.addEventListener("click",()=>{
 <header>
   <div class="swastik left">卐</div>
   <div class="swastik right">卐</div>
-
   <img src="images/nagamma.jpeg" class="nagamma-img" onclick="openZoom(this.src)">
   <h1 id="title"></h1>
   <p id="subtitle"></p>
@@ -338,18 +337,22 @@ btn:"🌐 English"
 }
 };
 
+function applyLang(){
+  const L = telugu ? LANG.te : LANG.en;
+  for(const k in L){
+    const el=document.getElementById(k.replace("_","-"))||document.getElementById(k);
+    if(el) el.innerHTML=L[k];
+  }
+  document.querySelector(".lang-btn").innerText=L.btn;
+}
+
 function toggleLang(){
-telugu=!telugu;
-const L=telugu?LANG.te:LANG.en;
-
-for(const k in L){
-  const el=document.getElementById(k.replace("_","-"))||document.getElementById(k);
-  if(el) el.innerHTML=L[k];
-}
-document.querySelector(".lang-btn").innerText=L.btn;
+  telugu=!telugu;
+  applyLang();
 }
 
-toggleLang();toggleLang();
+/* INITIAL LOAD */
+applyLang();
 
 function getDirections(){
 navigator.geolocation.getCurrentPosition(p=>{
