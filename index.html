@@ -87,9 +87,7 @@ h1,h2{color:#800000;}
   border-radius:50%;
   border:3px solid gold;
   cursor:pointer;
-  transition:transform .3s;
 }
-.image-wrap img:hover{transform:scale(1.05);}
 .watermark{
   position:absolute;
   bottom:8px;
@@ -99,8 +97,27 @@ h1,h2{color:#800000;}
   font-weight:bold;
   color:rgba(255,215,0,0.85);
   text-shadow:1px 1px 4px black;
-  pointer-events:none;
 }
+
+/* CALENDAR */
+#calendarTable{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+}
+#calendarTable th,#calendarTable td{
+  border:1px solid #ccc;
+  padding:8px;
+}
+#calendarTable th{
+  background:#800000;
+  color:white;
+}
+.govt{background:#e3f2fd;}
+.pournami{background:#fff9c4;font-weight:bold;}
+.amavasya{background:#ede7f6;font-weight:bold;}
+.temple{background:#fce4ec;font-weight:bold;}
+.today{background:#c8e6c9 !important;font-weight:bold;}
 
 /* CONTACT */
 .contact-buttons a{
@@ -155,7 +172,6 @@ footer{
   max-width:90%;
   max-height:90%;
   border:6px solid gold;
-  border-radius:12px;
 }
 .overlay span{
   position:absolute;
@@ -199,6 +215,7 @@ footer{
 <nav>
   <a id="nav-about" href="#about">About</a>
   <a id="nav-founders" href="#founders">Founders</a>
+  <a id="nav-calendar" href="#calendar">Calendar</a>
   <a id="nav-location" href="#location">Location</a>
   <a id="nav-donate" href="#donate">Donations</a>
   <a id="nav-contact" href="#contact">Contact</a>
@@ -213,7 +230,6 @@ footer{
 
 <section id="founders">
   <h2 id="founders-title">Temple Founders & Contributor</h2>
-
   <div class="founders">
 
     <div class="founder-card">
@@ -246,6 +262,29 @@ footer{
   </div>
 </section>
 
+<section id="calendar">
+  <h2 id="calendar-title">📅 2026 Temple Calendar</h2>
+
+  <select id="monthFilter" onchange="renderCalendar()">
+    <option value="all">All Months</option>
+    <option value="01">January</option><option value="02">February</option>
+    <option value="03">March</option><option value="04">April</option>
+    <option value="05">May</option><option value="06">June</option>
+    <option value="07">July</option><option value="08">August</option>
+    <option value="09">September</option><option value="10">October</option>
+    <option value="11">November</option><option value="12">December</option>
+  </select>
+
+  <table id="calendarTable">
+    <thead>
+      <tr><th>Date</th><th>Day</th><th>Event</th></tr>
+    </thead>
+    <tbody id="calendarBody"></tbody>
+  </table>
+
+  <p>🟦 Govt Holiday | 🌕 Pournami | 🌑 Amavasya | 🐍 Temple Special</p>
+</section>
+
 <section id="location">
   <h2 id="location-title">Temple Location</h2>
   <iframe src="https://www.google.com/maps?q=FVQC+VJR+Nagalamma+Temple,+Thimmanayana+Palli,+Sodum,+Andhra+Pradesh&output=embed"></iframe>
@@ -274,7 +313,6 @@ footer{
   <div class="footer-dharma">🕉️ Sanātana Dharma – Eternal Way of Life 🕉️</div>
 </footer>
 
-<!-- ZOOM OVERLAY -->
 <div class="overlay" id="overlay">
   <span onclick="closeZoom()">✖</span>
   <img id="zoomImage">
@@ -289,6 +327,7 @@ const textMap={
   subtitle:{en:"Abode of Divine Energy & Protection",te:"దైవిక శక్తి మరియు రక్షణ ఆలయం"},
   "nav-about":{en:"About",te:"గురించి"},
   "nav-founders":{en:"Founders",te:"స్థాపకులు"},
+  "nav-calendar":{en:"Calendar",te:"క్యాలెండర్"},
   "nav-location":{en:"Location",te:"స్థానం"},
   "nav-donate":{en:"Donations",te:"దానం"},
   "nav-contact":{en:"Contact",te:"సంప్రదించండి"},
@@ -298,6 +337,7 @@ const textMap={
     te:"శ్రీ నాగమ్మ ఆలయం భక్తులకు రక్షణ మరియు శ్రేయస్సును ప్రసాదించే పవిత్ర ఆలయం."
   },
   "founders-title":{en:"Temple Founders & Contributor",te:"ఆలయ స్థాపకులు & సహకారులు"},
+  "calendar-title":{en:"📅 2026 Temple Calendar",te:"📅 2026 ఆలయ క్యాలెండర్"},
   "location-title":{en:"Temple Location",te:"ఆలయ స్థానం"},
   "donate-title":{en:"Donations",te:"దానం"},
   "contact-title":{en:"Contact",te:"సంప్రదించండి"},
@@ -307,6 +347,23 @@ const textMap={
   }
 };
 
+const calendar2026=[
+{date:"2026-01-01",day:"Thu",en:"New Year",te:"నూతన సంవత్సరం",type:"govt"},
+{date:"2026-01-06",day:"Tue",en:"Amavasya",te:"అమావాస్య",type:"amavasya"},
+{date:"2026-01-14",day:"Wed",en:"Makara Sankranti",te:"మకర సంక్రాంతి",type:"govt"},
+{date:"2026-01-21",day:"Wed",en:"Pournami",te:"పౌర్ణమి",type:"pournami"},
+{date:"2026-02-04",day:"Wed",en:"Pournami",te:"పౌర్ణమి",type:"pournami"},
+{date:"2026-02-19",day:"Thu",en:"Amavasya",te:"అమావాస్య",type:"amavasya"},
+{date:"2026-03-07",day:"Sat",en:"Maha Shivaratri",te:"మహా శివరాత్రి",type:"govt"},
+{date:"2026-03-20",day:"Fri",en:"Amavasya",te:"అమావాస్య",type:"amavasya"},
+{date:"2026-03-21",day:"Sat",en:"Pournami",te:"పౌర్ణమి",type:"pournami"},
+{date:"2026-04-14",day:"Tue",en:"Ugadi",te:"ఉగాది",type:"govt"},
+{date:"2026-04-19",day:"Sun",en:"Pournami",te:"పౌర్ణమి",type:"pournami"},
+{date:"2026-07-29",day:"Wed",en:"Naga Panchami",te:"నాగ పంచమి",type:"temple"},
+{date:"2026-08-15",day:"Sat",en:"Independence Day",te:"స్వాతంత్ర్య దినోత్సవం",type:"govt"},
+{date:"2026-10-02",day:"Fri",en:"Gandhi Jayanti",te:"గాంధీ జయంతి",type:"govt"}
+];
+
 function toggleLang(){
   telugu=!telugu;
   for(const id in textMap){
@@ -314,6 +371,23 @@ function toggleLang(){
     if(el) el.innerText=telugu?textMap[id].te:textMap[id].en;
   }
   document.querySelector(".lang-btn").innerText=telugu?"🌐 English":"🌐 తెలుగు";
+  renderCalendar();
+}
+
+function renderCalendar(){
+  const body=document.getElementById("calendarBody");
+  const filter=document.getElementById("monthFilter").value;
+  body.innerHTML="";
+  const today=new Date().toISOString().split("T")[0];
+
+  calendar2026.forEach(e=>{
+    if(filter!=="all" && e.date.split("-")[1]!==filter) return;
+    const tr=document.createElement("tr");
+    tr.className=e.type;
+    if(e.date===today) tr.classList.add("today");
+    tr.innerHTML=`<td>${e.date}</td><td>${e.day}</td><td>${telugu?e.te:e.en}</td>`;
+    body.appendChild(tr);
+  });
 }
 
 function openZoom(src,name){
@@ -324,6 +398,8 @@ function openZoom(src,name){
 function closeZoom(){
   document.getElementById("overlay").style.display="none";
 }
+
+renderCalendar();
 </script>
 
 </body>
