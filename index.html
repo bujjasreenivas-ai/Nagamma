@@ -125,6 +125,19 @@ iframe{
   border-radius:10px;
 }
 
+.contact a{
+  display:inline-block;
+  margin:6px;
+  padding:10px 16px;
+  border-radius:25px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:bold;
+}
+.call{background:#28a745;}
+.whatsapp{background:#25D366;}
+.email{background:#0072c6;}
+
 footer{
   background:#3b2f2f;
   color:#fff;
@@ -132,6 +145,7 @@ footer{
   padding:20px;
 }
 
+/* ZOOM */
 .overlay{
   display:none;
   position:fixed;
@@ -176,20 +190,21 @@ footer{
   <div class="swastik right">卐</div>
 
   <img src="images/nagamma.jpeg" class="nagamma-img"
-       onclick="openZoom('images/nagamma.jpeg','శ్రీ నాగమ్మ దేవి')">
+       onclick="openZoom(this.src,'శ్రీ నాగమ్మ దేవి')">
 
   <h1 id="title">🕉️ Sri Nagamma Temple</h1>
   <p id="subtitle">Abode of Divine Energy & Protection</p>
-  <p style="color:gold;font-weight:bold;" id="dharma">Sanatana Dharma</p>
+  <p id="dharma" style="color:gold;font-weight:bold;">Sanatana Dharma</p>
 
   <button class="lang-btn" onclick="toggleLang()">🌐 తెలుగు</button>
 </header>
 
 <nav>
-  <a href="#about" id="nav-about">About</a>
-  <a href="#founders" id="nav-founders">Founders</a>
-  <a href="#calendar" id="nav-calendar">Calendar</a>
-  <a href="#location" id="nav-location">Location</a>
+  <a id="nav-about" href="#about">About</a>
+  <a id="nav-founders" href="#founders">Founders</a>
+  <a id="nav-calendar" href="#calendar">Calendar</a>
+  <a id="nav-location" href="#location">Location</a>
+  <a id="nav-contact" href="#contact">Contact</a>
 </nav>
 
 <section id="about">
@@ -224,7 +239,9 @@ Sri Nagamma Temple is a sacred shrine where Goddess Nagamma blesses devotees.
 <h2 id="cal-title">📅 2026 Temple Calendar</h2>
 <table id="calendarTable">
 <thead>
-<tr><th>Date</th><th>Day</th><th>Event</th></tr>
+<tr>
+<th>Date</th><th>Day</th><th>Event</th>
+</tr>
 </thead>
 <tbody id="calendarBody"></tbody>
 </table>
@@ -232,7 +249,22 @@ Sri Nagamma Temple is a sacred shrine where Goddess Nagamma blesses devotees.
 
 <section id="location">
 <h2 id="loc-title">Temple Location</h2>
-<iframe src="https://www.google.com/maps?q=AUMSPHwV4DB1h9Nj7&output=embed"></iframe>
+<iframe 
+src="https://www.google.com/maps/embed?pb=!1m2!1m1!1sAUMSPHwV4DB1h9Nj7"
+loading="lazy"
+referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+</section>
+
+<section id="contact">
+<h2 id="contact-title">Contact</h2>
+<div class="contact">
+<a class="call" href="tel:+918328572062">📞 8328572062</a>
+<a class="call" href="tel:+919032278106">📞 9032278106</a><br>
+<a class="whatsapp" href="https://wa.me/918328572062" target="_blank">💬 WhatsApp</a><br>
+<a class="email" href="mailto:bujja.sreenivas@gmail.com">✉️ Sreenivas</a>
+<a class="email" href="mailto:bujjaravishankar@gmail.com">✉️ Ravishankar</a>
+</div>
 </section>
 
 <footer id="footer-text">
@@ -240,7 +272,7 @@ Sri Nagamma Temple is a sacred shrine where Goddess Nagamma blesses devotees.
 🕉️ Sanatana Dharma – Eternal Way of Life
 </footer>
 
-<!-- ZOOM OVERLAY -->
+<!-- ZOOM -->
 <div class="overlay" id="overlay">
   <span onclick="closeZoom()">✖</span>
   <img id="zoomImage">
@@ -250,24 +282,8 @@ Sri Nagamma Temple is a sacred shrine where Goddess Nagamma blesses devotees.
 <script>
 let telugu=false;
 
-function toggleLang(){
-  telugu=!telugu;
-  document.getElementById("title").innerText=telugu?"🕉️ శ్రీ నాగమ్మ ఆలయం":"🕉️ Sri Nagamma Temple";
-  document.getElementById("subtitle").innerText=telugu?"దైవిక శక్తి మరియు రక్షణ ఆలయం":"Abode of Divine Energy & Protection";
-  document.getElementById("about-title").innerText=telugu?"ఆలయం గురించి":"About the Temple";
-  document.getElementById("about-text").innerText=telugu?
-    "శ్రీ నాగమ్మ ఆలయం భక్తులను ఆశీర్వదించే పవిత్ర ఆలయం.":
-    "Sri Nagamma Temple is a sacred shrine where Goddess Nagamma blesses devotees.";
-  document.getElementById("founders-title").innerText=telugu?"ఆలయ స్థాపకులు & సహకారి":"Temple Founders & Contributor";
-  document.getElementById("f1").innerText=telugu?"స్థాపకుడు":"Founder";
-  document.getElementById("f2").innerText=telugu?"స్థాపకురాలు":"Founder";
-  document.getElementById("f3").innerText=telugu?"సహకారి":"Contributor";
-  document.getElementById("cal-title").innerText=telugu?"📅 2026 ఆలయ క్యాలెండర్":"📅 2026 Temple Calendar";
-  document.getElementById("loc-title").innerText=telugu?"ఆలయ స్థానం":"Temple Location";
-}
-
 const calendar2026=[
-{date:"2026-01-01",day:"Thu",en:"New Year",te:"నూతన సంవత్సరం",type:"govt"},
+{date:"2026-01-01",day:"Thu",en:"New Year (Govt Holiday)",te:"నూతన సంవత్సరం",type:"govt"},
 {date:"2026-01-21",day:"Wed",en:"Pournami",te:"పౌర్ణమి",type:"pournami"},
 {date:"2026-02-19",day:"Thu",en:"Amavasya",te:"అమావాస్య",type:"amavasya"},
 {date:"2026-07-29",day:"Wed",en:"Naga Panchami",te:"నాగ పంచమి",type:"temple"}
@@ -284,6 +300,28 @@ function renderCalendar(){
   });
 }
 renderCalendar();
+
+function toggleLang(){
+  telugu=!telugu;
+  document.getElementById("title").innerText=telugu?"🕉️ శ్రీ నాగమ్మ ఆలయం":"🕉️ Sri Nagamma Temple";
+  document.getElementById("subtitle").innerText=telugu?"దైవిక శక్తి మరియు రక్షణ ఆలయం":"Abode of Divine Energy & Protection";
+  document.getElementById("about-title").innerText=telugu?"ఆలయం గురించి":"About the Temple";
+  document.getElementById("about-text").innerText=telugu?
+    "శ్రీ నాగమ్మ ఆలయం భక్తులను ఆశీర్వదించే పవిత్ర ఆలయం.":
+    "Sri Nagamma Temple is a sacred shrine where Goddess Nagamma blesses devotees.";
+  document.getElementById("founders-title").innerText=telugu?"ఆలయ స్థాపకులు & సహకారి":"Temple Founders & Contributor";
+  document.getElementById("f1").innerText=telugu?"స్థాపకుడు":"Founder";
+  document.getElementById("f2").innerText=telugu?"స్థాపకురాలు":"Founder";
+  document.getElementById("f3").innerText=telugu?"సహకారి":"Contributor";
+  document.getElementById("cal-title").innerText=telugu?"📅 2026 ఆలయ క్యాలెండర్":"📅 2026 Temple Calendar";
+  document.getElementById("loc-title").innerText=telugu?"ఆలయ స్థానం":"Temple Location";
+  document.getElementById("contact-title").innerText=telugu?"సంప్రదించండి":"Contact";
+  document.getElementById("footer-text").innerHTML=telugu?
+    "© 2025 శ్రీ నాగమ్మ ఆలయం<br>🕉️ సనాతన ధర్మం – శాశ్వత జీవన మార్గం":
+    "© 2025 Sri Nagamma Temple<br>🕉️ Sanatana Dharma – Eternal Way of Life";
+  document.querySelector(".lang-btn").innerText=telugu?"🌐 English":"🌐 తెలుగు";
+  renderCalendar();
+}
 
 function openZoom(src,name){
   document.getElementById("zoomImage").src=src;
