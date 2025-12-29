@@ -6,13 +6,11 @@
 <title>Sri Nagamma Temple</title>
 
 <style>
-/* --- SAME CSS AS YOU HAD (UNCHANGED) --- */
 body{
   font-family:'Segoe UI',sans-serif;
   margin:0;
   background:#fffaf3;
   color:#3b2f2f;
-  overflow-x:hidden;
 }
 .announcement{
   background:gold;
@@ -36,6 +34,7 @@ header{
 }
 .swastik.left{left:20px;}
 .swastik.right{right:20px;}
+
 .nagamma-img{
   width:150px;
   height:150px;
@@ -43,6 +42,7 @@ header{
   border:4px solid gold;
   cursor:pointer;
 }
+
 nav{
   background:#d4a017;
   display:flex;
@@ -55,42 +55,10 @@ nav a{
   text-decoration:none;
 }
 nav a:hover{background:#b8860b;}
+
 section{padding:30px;}
 h1,h2{color:#800000;}
-.founders{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:20px;
-}
-.founder-card{
-  background:#fff;
-  width:260px;
-  padding:15px;
-  border-radius:12px;
-  text-align:center;
-}
-.image-wrap{
-  position:relative;
-  display:inline-block;
-}
-.image-wrap img{
-  width:140px;
-  height:140px;
-  border-radius:50%;
-  border:3px solid gold;
-  cursor:pointer;
-}
-.watermark{
-  position:absolute;
-  bottom:8px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:14px;
-  font-weight:bold;
-  color:rgba(255,215,0,0.85);
-  text-shadow:1px 1px 4px black;
-}
+
 #calendarTable{
   width:100%;
   border-collapse:collapse;
@@ -104,46 +72,31 @@ h1,h2{color:#800000;}
   background:#800000;
   color:white;
 }
+
 .govt{background:#e3f2fd;}
 .pournami{background:#fff9c4;font-weight:bold;}
 .amavasya{background:#ede7f6;font-weight:bold;}
 .temple{background:#fce4ec;font-weight:bold;}
-.today{background:#c8e6c9 !important;font-weight:bold;}
-.contact-buttons a{
-  display:inline-block;
-  margin:6px;
-  padding:10px 16px;
-  border-radius:25px;
-  color:#fff;
-  text-decoration:none;
-  font-weight:bold;
+
+.cal-icon{
+  width:26px;
+  vertical-align:middle;
 }
-.call{background:#28a745;}
-.whatsapp{background:#25D366;}
-.email{background:#0072c6;}
-.donate-btn{background:#800000;}
-iframe{
-  width:100%;
-  height:350px;
-  border:0;
-  border-radius:10px;
+.glow{
+  animation:glow 2s infinite alternate;
 }
+@keyframes glow{
+  from{box-shadow:0 0 5px gold;}
+  to{box-shadow:0 0 15px gold;}
+}
+
 footer{
   background:#3b2f2f;
   color:#fff;
   text-align:center;
   padding:20px;
 }
-.footer-dharma{color:gold;font-weight:bold;}
-.lang-btn{
-  background:#d4a017;
-  color:#fff;
-  border:none;
-  padding:6px 12px;
-  border-radius:5px;
-  cursor:pointer;
-  margin-top:10px;
-}
+
 .overlay{
   display:none;
   position:fixed;
@@ -178,8 +131,8 @@ footer{
 
 <body>
 
-<div class="announcement" id="announcement-text">
-🔔 Abhishekam every Tuesday, Friday & Sunday at 6:00 AM | Devotees Welcome 🙏
+<div class="announcement">
+🔔 Abhishekam every Tuesday, Friday & Sunday at 6:00 AM
 </div>
 
 <header>
@@ -189,46 +142,80 @@ footer{
   <img src="images/nagamma.jpeg" class="nagamma-img"
        onclick="openZoom('images/nagamma.jpeg','శ్రీ నాగమ్మ దేవి')">
 
-  <h1 id="title">🕉️ Sri Nagamma Temple</h1>
-  <p id="subtitle">Abode of Divine Energy & Protection</p>
+  <h1>🕉️ Sri Nagamma Temple</h1>
+  <p>Abode of Divine Energy & Protection</p>
   <p style="color:gold;font-weight:bold;">Sanatana Dharma</p>
-
-  <button class="lang-btn" onclick="toggleLang()">🌐 తెలుగు</button>
 </header>
 
 <nav>
-  <a id="nav-about" href="#about">About</a>
-  <a id="nav-founders" href="#founders">Founders</a>
-  <a id="nav-calendar" href="#calendar">Calendar</a>
-  <a id="nav-location" href="#location">Location</a>
-  <a id="nav-donate" href="#donate">Donations</a>
-  <a id="nav-contact" href="#contact">Contact</a>
+  <a href="#calendar">Calendar</a>
 </nav>
 
-<!-- CONTENT SECTIONS UNCHANGED -->
+<section id="calendar">
+<h2>📅 2026 Temple Calendar</h2>
+
+<table id="calendarTable">
+<thead>
+<tr>
+  <th>Date</th>
+  <th>Day</th>
+  <th>Event</th>
+</tr>
+</thead>
+<tbody id="calendarBody"></tbody>
+</table>
+
+<p>
+🟦 Govt Holiday |
+🌕 Pournami |
+🌑 Amavasya |
+🐍 Temple Special
+</p>
+</section>
+
+<footer>
+© 2025 Sri Nagamma Temple<br>
+🕉️ Sanatana Dharma – Eternal Way of Life
+</footer>
+
+<!-- ZOOM -->
+<div class="overlay" id="overlay">
+  <span onclick="closeZoom()">✖</span>
+  <img id="zoomImage">
+  <div class="wm" id="zoomWM"></div>
+</div>
 
 <script>
-/* ---------- FIXED JS (NO SMART QUOTES) ---------- */
-
-let telugu=false;
-
 const calendar2026=[
-{date:"2026-01-01",day:"Thu",en:"New Year's Day",te:"నూతన సంవత్సరం",type:"govt"},
-{date:"2026-01-13",day:"Tue",en:"Bhogi",te:"భోగి",type:"govt"},
-{date:"2026-01-14",day:"Wed",en:"Sankranti",te:"సంక్రాంతి",type:"govt"},
-{date:"2026-01-15",day:"Thu",en:"Kanuma",te:"కనుమ",type:"govt"},
-{date:"2026-01-21",day:"Wed",en:"Pournami",te:"పౌర్ణమి",type:"pournami"},
-{date:"2026-01-26",day:"Mon",en:"Republic Day",te:"గణతంత్ర దినోత్సవం",type:"govt"},
-{date:"2026-02-19",day:"Thu",en:"Amavasya",te:"అమావాస్య",type:"amavasya"},
-{date:"2026-03-20",day:"Fri",en:"Ugadi",te:"ఉగాది",type:"govt"},
-{date:"2026-03-21",day:"Sat",en:"Pournami",te:"పౌర్ణమి",type:"pournami"},
-{date:"2026-04-14",day:"Tue",en:"Ambedkar Jayanthi",te:"అంబేద్కర్ జయంతి",type:"govt"},
-{date:"2026-05-27",day:"Wed",en:"Bakrid",te:"బక్రీద్",type:"govt"},
-{date:"2026-07-29",day:"Wed",en:"Naga Panchami",te:"నాగ పంచమి",type:"temple"},
-{date:"2026-08-15",day:"Sat",en:"Independence Day",te:"స్వాతంత్ర్య దినోత్సవం",type:"govt"},
-{date:"2026-10-21",day:"Wed",en:"Vijayadasami",te:"విజయదశమి",type:"govt"},
-{date:"2026-12-25",day:"Fri",en:"Christmas",te:"క్రిస్మస్",type:"govt"}
+{date:"2026-01-01",day:"Thu",name:"New Year",type:"govt"},
+{date:"2026-01-21",day:"Wed",name:"Pournami",type:"pournami"},
+{date:"2026-02-19",day:"Thu",name:"Amavasya",type:"amavasya"},
+{date:"2026-07-29",day:"Wed",name:"Naga Panchami",type:"temple"},
+{date:"2026-08-15",day:"Sat",name:"Independence Day",type:"govt"},
+{date:"2026-10-21",day:"Wed",name:"Vijayadasami",type:"govt"}
 ];
+
+function renderCalendar(){
+  const body=document.getElementById("calendarBody");
+  calendar2026.forEach(e=>{
+    let icon="";
+    if(e.type==="pournami")
+      icon=` <img src="images/calendar/pournami.jpeg" class="cal-icon glow">`;
+    if(e.type==="amavasya")
+      icon=` <img src="images/calendar/amavasya.jpeg" class="cal-icon">`;
+    if(e.type==="temple")
+      icon=` <img src="images/calendar/nagamma.jpeg" class="cal-icon">`;
+
+    const tr=document.createElement("tr");
+    tr.className=e.type;
+    tr.innerHTML=`
+      <td>${e.date}</td>
+      <td>${e.day}</td>
+      <td>${e.name}${icon}</td>`;
+    body.appendChild(tr);
+  });
+}
+renderCalendar();
 
 function openZoom(src,name){
   document.getElementById("zoomImage").src=src;
