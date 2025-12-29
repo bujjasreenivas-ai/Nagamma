@@ -11,7 +11,23 @@ body{
   margin:0;
   background:#fffaf3;
   color:#3b2f2f;
+  overflow-x:hidden;
 }
+
+/* 🌸 FLOWER ANIMATION */
+.flower{
+  position:fixed;
+  top:-50px;
+  font-size:24px;
+  animation:fall linear infinite;
+  z-index:999;
+}
+@keyframes fall{
+  0%{ transform:translateY(-50px) rotate(0deg); opacity:1;}
+  100%{ transform:translateY(110vh) rotate(360deg); opacity:0.8;}
+}
+
+/* ANNOUNCEMENT BANNER */
 .announcement{
   background:gold;
   color:#800000;
@@ -19,6 +35,8 @@ body{
   padding:10px;
   font-weight:bold;
 }
+
+/* HEADER */
 header{
   background:#800000;
   color:#fff;
@@ -26,22 +44,33 @@ header{
   text-align:center;
   position:relative;
 }
+
+/* SWASTIK */
 .swastik{
   position:absolute;
   top:20px;
   font-size:36px;
   color:gold;
 }
-.swastik.left{left:20px;}
-.swastik.right{right:20px;}
+.swastik.left{ left:20px; }
+.swastik.right{ right:20px; }
 
+/* NAGAMMA IMAGE */
 .nagamma-img{
   width:150px;
   height:150px;
   border-radius:50%;
+  object-fit:cover;
   border:4px solid gold;
-  cursor:pointer;
+  animation:glow 2.5s infinite alternate;
 }
+@keyframes glow{
+  from{ box-shadow:0 0 10px gold;}
+  to{ box-shadow:0 0 30px gold;}
+}
+
+section{ padding:30px; }
+h1,h2{ color:#800000; }
 
 nav{
   background:#d4a017;
@@ -53,238 +82,162 @@ nav a{
   color:#fff;
   padding:10px 15px;
   text-decoration:none;
-  font-weight:bold;
 }
-nav a:hover{background:#b8860b;}
+nav a:hover{ background:#b8860b; }
 
-section{padding:30px;}
-h1,h2{color:#800000;}
+/* FESTIVE BOX */
+.festive-box{
+  background:#fff3cd;
+  border-left:6px solid #d4a017;
+  padding:15px;
+  margin:15px 0;
+  border-radius:8px;
+}
 
-#calendarTable{
+/* CALENDAR TABLE */
+table{
   width:100%;
   border-collapse:collapse;
-  margin-top:15px;
 }
-#calendarTable th,#calendarTable td{
+th,td{
   border:1px solid #ccc;
-  padding:8px;
+  padding:10px;
+  text-align:left;
 }
-#calendarTable th{
+th{
   background:#800000;
   color:white;
 }
 
-.govt{background:#e3f2fd;}
-.pournami{background:#fff9c4;font-weight:bold;}
-.amavasya{background:#ede7f6;font-weight:bold;}
-.temple{background:#fce4ec;font-weight:bold;}
-
-.cal-icon{
-  width:26px;
-  vertical-align:middle;
-}
-.glow{
-  animation:glow 2s infinite alternate;
-}
-@keyframes glow{
-  from{box-shadow:0 0 5px gold;}
-  to{box-shadow:0 0 15px gold;}
-}
-
+/* FOOTER */
 footer{
   background:#3b2f2f;
   color:#fff;
   text-align:center;
   padding:20px;
 }
-
-.overlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.9);
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-}
-.overlay img{
-  max-width:90%;
-  max-height:90%;
-  border:6px solid gold;
-}
-.overlay span{
-  position:absolute;
-  top:20px;
-  right:30px;
-  font-size:30px;
-  color:#fff;
-  cursor:pointer;
-}
-.overlay .wm{
-  position:absolute;
-  bottom:30px;
-  font-size:22px;
+.footer-dharma{
   color:gold;
   font-weight:bold;
-}
-.donate-btn{
-  display:inline-block;
-  padding:12px 20px;
-  background:#800000;
-  color:white;
-  border-radius:8px;
-  text-decoration:none;
-  font-weight:bold;
+  margin-top:8px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- 🌸 FLOWERS -->
+<script>
+for(let i=0;i<20;i++){
+  let f=document.createElement("div");
+  f.className="flower";
+  f.innerText="🌸";
+  f.style.left=Math.random()*100+"vw";
+  f.style.animationDuration=(5+Math.random()*5)+"s";
+  document.body.appendChild(f);
+}
+</script>
+
 <div class="announcement">
-🔔 Abhishekam every Tuesday, Friday & Sunday at 6:00 AM
+🔔 Abhishekam every Tuesday, Friday & Sunday at 6:00 AM | Devotees Welcome 🙏
 </div>
 
 <header>
   <div class="swastik left">卐</div>
   <div class="swastik right">卐</div>
 
-  <img src="images/nagamma.jpeg" class="nagamma-img"
-       onclick="openZoom('images/nagamma.jpeg','శ్రీ నాగమ్మ దేవి')">
+  <img src="images/nagamma.jpeg" class="nagamma-img"><br><br>
 
   <h1>🕉️ Sri Nagamma Temple</h1>
   <p>Abode of Divine Energy & Protection</p>
-  <p style="color:gold;font-weight:bold;">Sanatana Dharma</p>
+  <p style="color:gold;font-weight:bold;">Sanātana Dharma</p>
 </header>
 
 <nav>
   <a href="#about">About</a>
-  <a href="#founders">Founders</a>
-  <a href="#calendar">Calendar</a>
-  <a href="#donate">Donations</a>
+  <a href="#festivals">Festivals</a>
+  <a href="#calendar">2026 Calendar</a>
   <a href="#contact">Contact</a>
 </nav>
 
 <section id="about">
-<h2>🕉️ About the Temple</h2>
+<h2>About the Temple</h2>
 <p>
-Sri Nagamma Temple is a sacred shrine dedicated to Goddess Nagamma.
-The deity is believed to be highly powerful and protective.
-It is believed that Goddess Nagamma appeared in a divine dream to
-<b>Bujja Ravishankar</b> and inspired the construction of this temple.
-After nearly <b>10 years of dedication and hardships</b>,
-the temple was successfully built for the welfare of devotees.
+Sri Nagamma Temple is a sacred shrine where Goddess Nagamma blesses devotees
+with protection, fertility, prosperity and relief from Sarpa Dosha.
 </p>
 </section>
 
-<section id="founders">
-<h2>🙏 Temple Founders & Contributor</h2>
-<p><b>Founder:</b> BUJJA RAVISHANKAR</p>
-<p><b>Founder:</b> BUJJA NAVANEETHAMMA (W/o Ravishankar)</p>
-<p><b>Contributor:</b> BUJJA SREENIVAS</p>
+<section id="festivals">
+<h2>Festive Announcements</h2>
+
+<div class="festive-box">
+<strong>🐍 Naga Panchami</strong><br>
+Special Abhishekam, Milk Offering & Sarpa Dosha Nivaranam Pooja
+</div>
+
+<div class="festive-box">
+<strong>🔥 Karthika Masam</strong><br>
+Deepa Aaradhana every Monday & Thursday evening
+</div>
+
+<div class="festive-box">
+<strong>🌺 Navaratri</strong><br>
+Alankaram, Kumkuma Archana & Cultural Programs
+</div>
 </section>
 
 <section id="calendar">
-<h2>📅 2026 Temple Calendar</h2>
+<h2>📅 Temple Events Calendar – 2026</h2>
 
-<table id="calendarTable">
-<thead>
+<table>
 <tr>
-  <th>Date</th>
-  <th>Day</th>
-  <th>Event</th>
+<th>Date</th>
+<th>Event</th>
+<th>Details</th>
 </tr>
-</thead>
-<tbody id="calendarBody"></tbody>
+<tr>
+<td>Jan 21, 2026</td>
+<td>Naga Panchami</td>
+<td>Special Abhishekam & Milk Pooja</td>
+</tr>
+<tr>
+<td>Mar 22 – Apr 1</td>
+<td>Navaratri</td>
+<td>Daily Alankaram & Devi Pooja</td>
+</tr>
+<tr>
+<td>Jul – Aug</td>
+<td>Shravana Masam</td>
+<td>Friday Abhishekam Special</td>
+</tr>
+<tr>
+<td>Nov</td>
+<td>Karthika Masam</td>
+<td>Deepa Aaradhana</td>
+</tr>
+<tr>
+<td>Every Tue, Fri, Sun</td>
+<td>Abhishekam</td>
+<td>Morning 6:00 AM</td>
+</tr>
 </table>
-
-<p>
-🟦 Govt Holiday |
-🌕 Pournami |
-🌑 Amavasya |
-🐍 Temple Special
-</p>
-</section>
-
-<section id="donate">
-<h2>💰 Donations (UPI)</h2>
-<p>Your kind donations support poojas, temple maintenance, and festivals.</p>
-<p><b>UPI ID:</b> 8328572062@ybl</p>
-
-<a class="donate-btn"
-href="upi://pay?pa=8328572062@ybl&pn=Sri%20Nagamma%20Temple&cu=INR">
-💰 Donate via UPI
-</a>
 </section>
 
 <section id="contact">
-<h2>📞 Contact</h2>
+<h2>Contact</h2>
 <p>
-📍 Sadum (Thimmanayanapalli), Andhra Pradesh
-</p>
-<p>
-📞 <a href="tel:+918328572062">+91 83285 72062</a><br>
-📞 <a href="tel:+919032278106">+91 90322 78106</a>
-</p>
-<p>
-✉️ <a href="mailto:bujja.sreenivas@gmail.com">bujja.sreenivas@gmail.com</a><br>
-✉️ <a href="mailto:bujjaravishankar@gmail.com">bujjaravishankar@gmail.com</a>
+📞 +91-8328572062<br>
+📞 +91-9032278106<br><br>
+✉️ bujja.sreenivas@gmail.com<br>
+✉️ bujjaravishankar@gmail.com
 </p>
 </section>
 
 <footer>
-© 2025 Sri Nagamma Temple<br>
-🕉️ Sanatana Dharma – Eternal Way of Life
+© 2025 Sri Nagamma Temple
+<div class="footer-dharma">🕉️ Sanātana Dharma – Eternal Way of Life 🕉️</div>
 </footer>
-
-<!-- ZOOM -->
-<div class="overlay" id="overlay">
-  <span onclick="closeZoom()">✖</span>
-  <img id="zoomImage">
-  <div class="wm" id="zoomWM"></div>
-</div>
-
-<script>
-const calendar2026=[
-{date:"2026-01-01",day:"Thu",name:"New Year",type:"govt"},
-{date:"2026-01-21",day:"Wed",name:"Pournami",type:"pournami"},
-{date:"2026-02-19",day:"Thu",name:"Amavasya",type:"amavasya"},
-{date:"2026-07-29",day:"Wed",name:"Naga Panchami",type:"temple"},
-{date:"2026-08-15",day:"Sat",name:"Independence Day",type:"govt"},
-{date:"2026-10-21",day:"Wed",name:"Vijayadasami",type:"govt"}
-];
-
-function renderCalendar(){
-  const body=document.getElementById("calendarBody");
-  calendar2026.forEach(e=>{
-    let icon="";
-    if(e.type==="pournami")
-      icon=` 🌕 <img src="images/calendar/pournami.jpeg" class="cal-icon glow">`;
-    if(e.type==="amavasya")
-      icon=` 🌑 <img src="images/calendar/amavasya.jpeg" class="cal-icon">`;
-    if(e.type==="temple")
-      icon=` 🐍 <img src="images/calendar/nagamma.jpeg" class="cal-icon">`;
-
-    const tr=document.createElement("tr");
-    tr.className=e.type;
-    tr.innerHTML=`
-      <td>${e.date}</td>
-      <td>${e.day}</td>
-      <td>${e.name}${icon}</td>`;
-    body.appendChild(tr);
-  });
-}
-renderCalendar();
-
-function openZoom(src,name){
-  document.getElementById("zoomImage").src=src;
-  document.getElementById("zoomWM").innerText=name;
-  document.getElementById("overlay").style.display="flex";
-}
-function closeZoom(){
-  document.getElementById("overlay").style.display="none";
-}
-</script>
 
 </body>
 </html>
