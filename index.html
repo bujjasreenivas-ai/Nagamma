@@ -11,21 +11,6 @@ body{
   margin:0;
   background:#fffaf3;
   color:#3b2f2f;
-  overflow-x:hidden;
-}
-
-/* FLOWERS */
-.flower{
-  position:fixed;
-  top:-40px;
-  font-size:22px;
-  color:gold;
-  animation:fall linear infinite;
-  z-index:999;
-}
-@keyframes fall{
-  0%{transform:translateY(-40px);opacity:1;}
-  100%{transform:translateY(110vh);opacity:0.6;}
 }
 
 /* HEADER */
@@ -45,31 +30,12 @@ header{
 .swastik.left{left:20px;}
 .swastik.right{right:20px;}
 
-.nagamma-wrap{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:15px;
-}
-.lion{
-  width:70px;
-  animation:lionMove 3s infinite alternate;
-}
-@keyframes lionMove{
-  from{transform:translateY(0);}
-  to{transform:translateY(-10px);}
-}
 .nagamma-img{
   width:150px;
   height:150px;
   border-radius:50%;
   border:4px solid gold;
-  animation:glow 2.5s infinite alternate;
   cursor:pointer;
-}
-@keyframes glow{
-  from{box-shadow:0 0 10px gold;}
-  to{box-shadow:0 0 30px gold;}
 }
 
 .lang-btn{
@@ -79,13 +45,51 @@ header{
   padding:6px 14px;
   border-radius:6px;
   cursor:pointer;
-  margin-top:10px;
   font-weight:bold;
 }
 
-section{padding:30px;}
-h1,h2{color:#800000;}
+/* NAV */
+nav{
+  background:#d4a017;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+nav a{
+  color:#fff;
+  padding:10px 15px;
+  text-decoration:none;
+  font-weight:bold;
+}
+nav a:hover{background:#b8860b;}
 
+section{padding:30px;}
+h2{color:#800000;}
+
+/* FOUNDERS */
+.founders{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+}
+.founder-card{
+  background:#fff;
+  width:260px;
+  padding:15px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.2);
+}
+.founder-card img{
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  border:3px solid gold;
+  cursor:pointer;
+}
+
+/* CALENDAR */
 table{
   width:100%;
   border-collapse:collapse;
@@ -96,13 +100,25 @@ th,td{
 }
 th{
   background:#800000;
-  color:#fff;
+  color:white;
 }
-
 .govt{background:#e3f2fd;}
 .pournami{background:#fff9c4;font-weight:bold;}
 .amavasya{background:#ede7f6;font-weight:bold;}
-.temple{background:#fce4ec;font-weight:bold;}
+
+/* CONTACT */
+.contact a{
+  display:inline-block;
+  margin:6px;
+  padding:10px 16px;
+  border-radius:25px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:bold;
+}
+.call{background:#28a745;}
+.whatsapp{background:#25D366;}
+.email{background:#0072c6;}
 
 iframe{
   width:100%;
@@ -132,7 +148,6 @@ footer{
   max-width:90%;
   max-height:90%;
   border:6px solid gold;
-  border-radius:12px;
 }
 .overlay span{
   position:absolute;
@@ -142,54 +157,64 @@ footer{
   color:#fff;
   cursor:pointer;
 }
-.overlay .wm{
-  position:absolute;
-  bottom:30px;
-  font-size:22px;
-  color:gold;
-  font-weight:bold;
-}
 </style>
 </head>
 
 <body>
 
-<script>
-for(let i=0;i<20;i++){
-  let f=document.createElement("div");
-  f.className="flower";
-  f.innerText="🌼";
-  f.style.left=Math.random()*100+"vw";
-  f.style.animationDuration=(6+Math.random()*6)+"s";
-  document.body.appendChild(f);
-}
-</script>
-
-<audio id="omSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_50e6e5b88f.mp3"></audio>
-<script>
-document.addEventListener("click",()=>{
-  const om=document.getElementById("omSound");
-  if(om.paused) om.play().catch(()=>{});
-},{once:true});
-</script>
-
 <header>
   <div class="swastik left">卐</div>
   <div class="swastik right">卐</div>
 
-  <div class="nagamma-wrap">
-    <img src="images/lion.png" class="lion">
-    <img src="images/nagamma.jpeg" class="nagamma-img"
-         onclick="openZoom(this.src,'శ్రీ నాగమ్మ దేవి')">
-    <img src="images/lion.png" class="lion">
-  </div>
+  <img src="images/nagamma.jpeg" class="nagamma-img"
+       onclick="openZoom(this.src,'శ్రీ నాగమ్మ దేవి')">
 
   <h1 id="title">🕉️ Sri Nagamma Temple</h1>
   <p id="subtitle">Abode of Divine Energy & Protection</p>
+
   <button class="lang-btn" onclick="toggleLang()">🌐 తెలుగు</button>
 </header>
 
-<section>
+<nav>
+  <a href="#about">About</a>
+  <a href="#founders">Founders</a>
+  <a href="#calendar">Calendar</a>
+  <a href="#location">Location</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- ABOUT -->
+<section id="about">
+<h2 id="about-title">About Goddess Nagamma</h2>
+<p id="about-text">
+Goddess Nagamma is revered as the divine Serpent Mother and the supreme guardian of life, fertility, health, land, and lineage. She represents the sacred Nāga tattva, symbolizing protection, justice, and ancestral balance. Devotees believe that sincere worship of Nagamma Devi removes Sarpa Dosha, grants progeny, protects families from unseen afflictions, and bestows prosperity and harmony. Her grace is especially powerful on Pournami and Amavasya.
+</p>
+</section>
+
+<!-- FOUNDERS -->
+<section id="founders">
+<h2 id="founders-title">Temple Founders & Contributor</h2>
+<div class="founders">
+  <div class="founder-card">
+    <img src="images/ravishankar.jpeg" onclick="openZoom(this.src)">
+    <b>BUJJA RAVISHANKAR</b><br>
+    <span id="f1">Founder</span>
+  </div>
+  <div class="founder-card">
+    <img src="images/navaneethamma.jpeg" onclick="openZoom(this.src)">
+    <b>BUJJA NAVANEETHAMMA</b><br>
+    <span id="f2">Founder</span>
+  </div>
+  <div class="founder-card">
+    <img src="images/sreenivas.jpeg" onclick="openZoom(this.src)">
+    <b>BUJJA SREENIVAS</b><br>
+    <span id="f3">Contributor</span>
+  </div>
+</div>
+</section>
+
+<!-- CALENDAR -->
+<section id="calendar">
 <h2 id="calendar-title">📅 2026 Temple Calendar</h2>
 <table>
 <tr><th>Date</th><th>Day</th><th>Event</th></tr>
@@ -197,15 +222,33 @@ document.addEventListener("click",()=>{
 </table>
 </section>
 
+<!-- LOCATION -->
+<section id="location">
+<h2 id="loc-title">Temple Location</h2>
+<iframe src="https://www.google.com/maps?q=Sri+Nagamma+Temple+Sadum+Andhra+Pradesh&output=embed"></iframe>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+<h2 id="contact-title">Contact</h2>
+<div class="contact">
+<a class="call" href="tel:+918328572062">📞 8328572062</a>
+<a class="call" href="tel:+919032278106">📞 9032278106</a><br>
+<a class="whatsapp" href="https://wa.me/918328572062">💬 WhatsApp</a><br>
+<a class="email" href="mailto:bujja.sreenivas@gmail.com">✉️ Sreenivas</a>
+<a class="email" href="mailto:bujjaravishankar@gmail.com">✉️ Ravishankar</a>
+</div>
+</section>
+
 <footer id="footer-text">
 © 2025 Sri Nagamma Temple<br>
 🕉️ Sanatana Dharma – Eternal Way of Life
 </footer>
 
+<!-- ZOOM -->
 <div class="overlay" id="overlay">
 <span onclick="closeZoom()">✖</span>
 <img id="zoomImage">
-<div class="wm" id="zoomWM"></div>
 </div>
 
 <script>
@@ -213,13 +256,9 @@ let telugu=false;
 
 const calendar2026=[
 {d:"2026-01-01",day:"Thu",en:"New Year (Govt Holiday)",te:"నూతన సంవత్సరం",c:"govt"},
-{d:"2026-01-14",day:"Wed",en:"Sankranti (AP Holiday)",te:"సంక్రాంతి",c:"govt"},
 {d:"2026-01-21",day:"Wed",en:"Pournami",te:"పౌర్ణమి",c:"pournami"},
 {d:"2026-02-19",day:"Thu",en:"Amavasya",te:"అమావాస్య",c:"amavasya"},
-{d:"2026-03-20",day:"Fri",en:"Ugadi (AP Holiday)",te:"ఉగాది",c:"govt"},
-{d:"2026-08-15",day:"Sat",en:"Independence Day",te:"స్వాతంత్ర్య దినోత్సవం",c:"govt"},
-{d:"2026-10-02",day:"Fri",en:"Gandhi Jayanthi",te:"గాంధీ జయంతి",c:"govt"},
-{d:"2026-07-29",day:"Wed",en:"Naga Panchami",te:"నాగ పంచమి",c:"temple"}
+{d:"2026-08-15",day:"Sat",en:"Independence Day",te:"స్వాతంత్ర్య దినోత్సవం",c:"govt"}
 ];
 
 function renderCalendar(){
@@ -227,30 +266,45 @@ function renderCalendar(){
   body.innerHTML="";
   calendar2026.forEach(e=>{
     body.innerHTML+=`
-      <tr class="${e.c}">
-        <td>${e.d}</td>
-        <td>${e.day}</td>
-        <td>${telugu?e.te:e.en}</td>
-      </tr>`;
+    <tr class="${e.c}">
+      <td>${e.d}</td>
+      <td>${e.day}</td>
+      <td>${telugu?e.te:e.en}</td>
+    </tr>`;
   });
 }
 renderCalendar();
 
 function toggleLang(){
   telugu=!telugu;
-  document.getElementById("title").innerText=telugu?"🕉️ శ్రీ నాగమ్మ ఆలయం":"🕉️ Sri Nagamma Temple";
-  document.getElementById("subtitle").innerText=telugu?"దైవిక శక్తి మరియు రక్షణ ఆలయం":"Abode of Divine Energy & Protection";
-  document.getElementById("calendar-title").innerText=telugu?"📅 2026 ఆలయ క్యాలెండర్":"📅 2026 Temple Calendar";
-  document.getElementById("footer-text").innerHTML=telugu?
-    "© 2025 శ్రీ నాగమ్మ ఆలయం<br>🕉️ సనాతన ధర్మం – శాశ్వత జీవన మార్గం":
-    "© 2025 Sri Nagamma Temple<br>🕉️ Sanatana Dharma – Eternal Way of Life";
-  document.querySelector(".lang-btn").innerText=telugu?"🌐 English":"🌐 తెలుగు";
+
+  document.getElementById("title").innerText = telugu ? "🕉️ శ్రీ నాగమ్మ ఆలయం" : "🕉️ Sri Nagamma Temple";
+  document.getElementById("subtitle").innerText = telugu ? "దైవిక శక్తి మరియు రక్షణ ఆలయం" : "Abode of Divine Energy & Protection";
+
+  document.getElementById("about-title").innerText = telugu ? "శ్రీ నాగమ్మ దేవి గురించి" : "About Goddess Nagamma";
+  document.getElementById("about-text").innerText = telugu
+    ? "శ్రీ నాగమ్మ దేవి జీవితం, సంతానం, ఆరోగ్యం, భూమి మరియు వంశ పరంపరను రక్షించే పరమ నాగమాత. ఆమె నాగ తత్త్వానికి ప్రతిరూపం. నాగమ్మ దేవిని భక్తితో ఆరాధిస్తే సర్ప దోష నివారణ కలిగి, సంతాన ప్రాప్తి, కుటుంబ రక్షణ మరియు ఐశ్వర్యం లభిస్తాయని విశ్వాసం. పౌర్ణమి మరియు అమావాస్య రోజుల్లో ఆమె కృప అత్యంత ప్రభావవంతంగా ఉంటుంది."
+    : "Goddess Nagamma is revered as the divine Serpent Mother and the supreme guardian of life, fertility, health, land, and lineage. She represents the sacred Nāga tattva, symbolizing protection, justice, and ancestral balance. Devotees believe that sincere worship removes Sarpa Dosha and grants prosperity. Her grace is especially powerful on Pournami and Amavasya.";
+
+  document.getElementById("founders-title").innerText = telugu ? "ఆలయ స్థాపకులు & సహకారి" : "Temple Founders & Contributor";
+  document.getElementById("f1").innerText = telugu ? "స్థాపకుడు" : "Founder";
+  document.getElementById("f2").innerText = telugu ? "స్థాపకురాలు" : "Founder";
+  document.getElementById("f3").innerText = telugu ? "సహకారి" : "Contributor";
+
+  document.getElementById("calendar-title").innerText = telugu ? "📅 2026 ఆలయ క్యాలెండర్" : "📅 2026 Temple Calendar";
+  document.getElementById("loc-title").innerText = telugu ? "ఆలయ స్థానం" : "Temple Location";
+  document.getElementById("contact-title").innerText = telugu ? "సంప్రదించండి" : "Contact";
+
+  document.getElementById("footer-text").innerHTML = telugu
+    ? "© 2025 శ్రీ నాగమ్మ ఆలయం<br>🕉️ సనాతన ధర్మం – శాశ్వత జీవన మార్గం"
+    : "© 2025 Sri Nagamma Temple<br>🕉️ Sanatana Dharma – Eternal Way of Life";
+
+  document.querySelector(".lang-btn").innerText = telugu ? "🌐 English" : "🌐 తెలుగు";
   renderCalendar();
 }
 
-function openZoom(src,name){
+function openZoom(src){
   document.getElementById("zoomImage").src=src;
-  document.getElementById("zoomWM").innerText=name;
   document.getElementById("overlay").style.display="flex";
 }
 function closeZoom(){
