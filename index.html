@@ -13,21 +13,6 @@ body{
   color:#3b2f2f;
   overflow-x:hidden;
 }
-
-/* 🌸 FLOWER ANIMATION */
-.flower{
-  position:fixed;
-  top:-40px;
-  font-size:22px;
-  animation:fall linear infinite;
-  z-index:999;
-}
-@keyframes fall{
-  0%{transform:translateY(-40px);opacity:1;}
-  100%{transform:translateY(110vh);opacity:0.7;}
-}
-
-/* ANNOUNCEMENT */
 .announcement{
   background:gold;
   color:#800000;
@@ -35,8 +20,6 @@ body{
   padding:10px;
   font-weight:bold;
 }
-
-/* HEADER */
 header{
   background:#800000;
   color:#fff;
@@ -44,8 +27,6 @@ header{
   text-align:center;
   position:relative;
 }
-
-/* SWASTIK */
 .swastik{
   position:absolute;
   top:20px;
@@ -55,43 +36,11 @@ header{
 .swastik.left{left:20px;}
 .swastik.right{right:20px;}
 
-/* NAGAMMA IMAGE */
 .nagamma-img{
   width:150px;
   height:150px;
   border-radius:50%;
-  object-fit:cover;
   border:4px solid gold;
-  animation:glow 2.5s infinite alternate;
-  cursor:pointer;
-}
-@keyframes glow{
-  from{box-shadow:0 0 10px gold;}
-  to{box-shadow:0 0 30px gold;}
-}
-
-/* FULL SCREEN OVERLAY */
-.overlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.9);
-  z-index:9999;
-  justify-content:center;
-  align-items:center;
-}
-.overlay img{
-  max-width:90%;
-  max-height:90%;
-  border:6px solid gold;
-  border-radius:12px;
-}
-.overlay span{
-  position:absolute;
-  top:20px;
-  right:30px;
-  color:white;
-  font-size:30px;
   cursor:pointer;
 }
 
@@ -125,18 +74,36 @@ h1,h2{color:#800000;}
   padding:15px;
   border-radius:12px;
   text-align:center;
-  box-shadow:0 2px 8px rgba(0,0,0,0.2);
 }
-.founder-card img{
+
+/* IMAGE + WATERMARK */
+.image-wrap{
+  position:relative;
+  display:inline-block;
+}
+.image-wrap img{
   width:140px;
   height:140px;
   border-radius:50%;
   border:3px solid gold;
+  cursor:pointer;
+  transition:transform .3s;
+}
+.image-wrap img:hover{transform:scale(1.05);}
+.watermark{
+  position:absolute;
+  bottom:8px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:14px;
+  font-weight:bold;
+  color:rgba(255,215,0,0.85);
+  text-shadow:1px 1px 4px black;
+  pointer-events:none;
 }
 
-/* CONTACT BUTTONS */
-.contact-buttons a,
-.donate-btn{
+/* CONTACT */
+.contact-buttons a{
   display:inline-block;
   margin:6px;
   padding:10px 16px;
@@ -150,7 +117,6 @@ h1,h2{color:#800000;}
 .email{background:#0072c6;}
 .donate-btn{background:#800000;}
 
-/* MAP */
 iframe{
   width:100%;
   height:350px;
@@ -158,19 +124,13 @@ iframe{
   border-radius:10px;
 }
 
-/* FOOTER */
 footer{
   background:#3b2f2f;
   color:#fff;
   text-align:center;
   padding:20px;
 }
-.footer-dharma{
-  color:gold;
-  font-weight:bold;
-  margin-top:8px;
-}
-
+.footer-dharma{color:gold;font-weight:bold;}
 .lang-btn{
   background:#d4a017;
   color:#fff;
@@ -180,24 +140,45 @@ footer{
   cursor:pointer;
   margin-top:10px;
 }
+
+/* ZOOM OVERLAY */
+.overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+.overlay img{
+  max-width:90%;
+  max-height:90%;
+  border:6px solid gold;
+  border-radius:12px;
+}
+.overlay span{
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:30px;
+  color:#fff;
+  cursor:pointer;
+}
+.overlay .wm{
+  position:absolute;
+  bottom:30px;
+  font-size:22px;
+  color:gold;
+  font-weight:bold;
+  text-shadow:2px 2px 6px black;
+}
 </style>
 </head>
 
 <body>
 
-<!-- FLOWERS -->
-<script>
-for(let i=0;i<20;i++){
-  let f=document.createElement("div");
-  f.className="flower";
-  f.innerText="🌸";
-  f.style.left=Math.random()*100+"vw";
-  f.style.animationDuration=(6+Math.random()*6)+"s";
-  document.body.appendChild(f);
-}
-</script>
-
-<div class="announcement">
+<div class="announcement" id="announcement-text">
 🔔 Abhishekam every Tuesday, Friday & Sunday at 6:00 AM | Devotees Welcome 🙏
 </div>
 
@@ -205,7 +186,8 @@ for(let i=0;i<20;i++){
   <div class="swastik left">卐</div>
   <div class="swastik right">卐</div>
 
-  <img src="images/nagamma.jpeg" class="nagamma-img" onclick="openImage()">
+  <img src="images/nagamma.jpeg" class="nagamma-img"
+       onclick="openZoom('images/nagamma.jpeg','శ్రీ నాగమ్మ దేవి')">
 
   <h1 id="title">🕉️ Sri Nagamma Temple</h1>
   <p id="subtitle">Abode of Divine Energy & Protection</p>
@@ -215,78 +197,133 @@ for(let i=0;i<20;i++){
 </header>
 
 <nav>
-  <a href="#about">About</a>
-  <a href="#founders">Founders</a>
-  <a href="#location">Location</a>
-  <a href="#donate">Donations</a>
-  <a href="#contact">Contact</a>
+  <a id="nav-about" href="#about">About</a>
+  <a id="nav-founders" href="#founders">Founders</a>
+  <a id="nav-location" href="#location">Location</a>
+  <a id="nav-donate" href="#donate">Donations</a>
+  <a id="nav-contact" href="#contact">Contact</a>
 </nav>
 
 <section id="about">
-<h2>About the Temple</h2>
-<p>
-Sri Nagamma Temple is a sacred shrine where Goddess Nagamma blesses devotees with protection and prosperity.
-</p>
+  <h2 id="about-title">About the Temple</h2>
+  <p id="about-text">
+    Sri Nagamma Temple is a sacred shrine where Goddess Nagamma blesses devotees with protection and prosperity.
+  </p>
 </section>
 
 <section id="founders">
-<h2>Temple Founders & Contributor</h2>
-<div class="founders">
-  <div class="founder-card"><img src="images/ravishankar.jpeg"><b>BUJJA RAVISHANKAR</b><br>Founder</div>
-  <div class="founder-card"><img src="images/navaneethamma.jpeg"><b>BUJJA NAVANEETHAMMA</b><br>Founder</div>
-  <div class="founder-card"><img src="images/sreenivas.jpeg"><b>BUJJA SREENIVAS</b><br>Contributor</div>
-</div>
+  <h2 id="founders-title">Temple Founders & Contributor</h2>
+
+  <div class="founders">
+
+    <div class="founder-card">
+      <div class="image-wrap">
+        <img src="images/ravishankar.jpeg"
+             onclick="openZoom(this.src,'బుజ్జా రవిశంకర్')">
+        <div class="watermark">బుజ్జా రవిశంకర్</div>
+      </div>
+      <b>BUJJA RAVISHANKAR</b><br>Founder
+    </div>
+
+    <div class="founder-card">
+      <div class="image-wrap">
+        <img src="images/navaneethamma.jpeg"
+             onclick="openZoom(this.src,'బుజ్జా నవనీతమ్మ')">
+        <div class="watermark">బుజ్జా నవనీతమ్మ</div>
+      </div>
+      <b>BUJJA NAVANEETHAMMA</b><br>Founder
+    </div>
+
+    <div class="founder-card">
+      <div class="image-wrap">
+        <img src="images/sreenivas.jpeg"
+             onclick="openZoom(this.src,'బుజ్జా శ్రీనివాస్')">
+        <div class="watermark">బుజ్జా శ్రీనివాస్</div>
+      </div>
+      <b>BUJJA SREENIVAS</b><br>Contributor
+    </div>
+
+  </div>
 </section>
 
 <section id="location">
-<h2>Temple Location</h2>
-<iframe src="https://www.google.com/maps?q=FVQC+VJR+Nagalamma+Temple,+Thimmanayana+Palli,+Sodum,+Andhra+Pradesh&output=embed"></iframe>
-<p style="text-align:center;">
-<a href="https://maps.app.goo.gl/AUMSPHwV4DB1h9Nj7" target="_blank" style="color:#800000;font-weight:bold;">
-📍 Open in Google Maps
-</a>
-</p>
+  <h2 id="location-title">Temple Location</h2>
+  <iframe src="https://www.google.com/maps?q=FVQC+VJR+Nagalamma+Temple,+Thimmanayana+Palli,+Sodum,+Andhra+Pradesh&output=embed"></iframe>
 </section>
 
 <section id="donate">
-<h2>Donations</h2>
-<p>Your support helps temple activities and Annadanam 🙏</p>
-<a class="donate-btn" href="upi://pay?pa=8328572062@ybl&pn=Sri%20Nagamma%20Temple&cu=INR">
-💰 Donate via UPI
-</a>
+  <h2 id="donate-title">Donations</h2>
+  <a class="donate-btn" href="upi://pay?pa=8328572062@ybl&pn=Sri%20Nagamma%20Temple&cu=INR">
+    💰 Donate via UPI
+  </a>
 </section>
 
 <section id="contact">
-<h2>Contact</h2>
-<div class="contact-buttons">
-<a class="call" href="tel:+918328572062">📞 8328572062</a>
-<a class="call" href="tel:+919032278106">📞 9032278106</a><br>
-<a class="whatsapp" href="https://wa.me/918328572062" target="_blank">💬 WhatsApp</a><br>
-<a class="email" href="mailto:bujja.sreenivas@gmail.com">✉️ Sreenivas</a>
-<a class="email" href="mailto:bujjaravishankar@gmail.com">✉️ Ravishankar</a>
-</div>
+  <h2 id="contact-title">Contact</h2>
+  <div class="contact-buttons">
+    <a class="call" href="tel:+918328572062">📞 8328572062</a>
+    <a class="call" href="tel:+919032278106">📞 9032278106</a><br>
+    <a class="whatsapp" href="https://wa.me/918328572062" target="_blank">💬 WhatsApp</a><br>
+    <a class="email" href="mailto:bujja.sreenivas@gmail.com">✉️ Sreenivas</a>
+    <a class="email" href="mailto:bujjaravishankar@gmail.com">✉️ Ravishankar</a>
+  </div>
 </section>
 
 <footer>
-© 2025 Sri Nagamma Temple
-<div class="footer-dharma">🕉️ Sanātana Dharma – Eternal Way of Life 🕉️</div>
+  © 2025 Sri Nagamma Temple
+  <div class="footer-dharma">🕉️ Sanātana Dharma – Eternal Way of Life 🕉️</div>
 </footer>
 
-<!-- FULL SCREEN IMAGE -->
+<!-- ZOOM OVERLAY -->
 <div class="overlay" id="overlay">
-  <span onclick="closeImage()">✖</span>
-  <img src="images/nagamma.jpeg">
+  <span onclick="closeZoom()">✖</span>
+  <img id="zoomImage">
+  <div class="wm" id="zoomWM"></div>
 </div>
 
 <script>
 let telugu=false;
+
+const textMap={
+  title:{en:"🕉️ Sri Nagamma Temple",te:"🕉️ శ్రీ నాగమ్మ ఆలయం"},
+  subtitle:{en:"Abode of Divine Energy & Protection",te:"దైవిక శక్తి మరియు రక్షణ ఆలయం"},
+  "nav-about":{en:"About",te:"గురించి"},
+  "nav-founders":{en:"Founders",te:"స్థాపకులు"},
+  "nav-location":{en:"Location",te:"స్థానం"},
+  "nav-donate":{en:"Donations",te:"దానం"},
+  "nav-contact":{en:"Contact",te:"సంప్రదించండి"},
+  "about-title":{en:"About the Temple",te:"ఆలయం గురించి"},
+  "about-text":{
+    en:"Sri Nagamma Temple is a sacred shrine where Goddess Nagamma blesses devotees with protection and prosperity.",
+    te:"శ్రీ నాగమ్మ ఆలయం భక్తులకు రక్షణ మరియు శ్రేయస్సును ప్రసాదించే పవిత్ర ఆలయం."
+  },
+  "founders-title":{en:"Temple Founders & Contributor",te:"ఆలయ స్థాపకులు & సహకారులు"},
+  "location-title":{en:"Temple Location",te:"ఆలయ స్థానం"},
+  "donate-title":{en:"Donations",te:"దానం"},
+  "contact-title":{en:"Contact",te:"సంప్రదించండి"},
+  "announcement-text":{
+    en:"🔔 Abhishekam every Tuesday, Friday & Sunday at 6:00 AM | Devotees Welcome 🙏",
+    te:"🔔 ప్రతి మంగళవారం, శుక్రవారం మరియు ఆదివారం ఉదయం 6 గంటలకు అభిషేకం | భక్తులకు స్వాగతం 🙏"
+  }
+};
+
 function toggleLang(){
   telugu=!telugu;
-  document.getElementById("title").innerText=telugu?"🕉️ శ్రీ నాగమ్మ ఆలయం":"🕉️ Sri Nagamma Temple";
-  document.getElementById("subtitle").innerText=telugu?"దైవిక శక్తి మరియు రక్షణ ఆలయం":"Abode of Divine Energy & Protection";
+  for(const id in textMap){
+    const el=document.getElementById(id);
+    if(el) el.innerText=telugu?textMap[id].te:textMap[id].en;
+  }
+  document.querySelector(".lang-btn").innerText=telugu?"🌐 English":"🌐 తెలుగు";
 }
-function openImage(){document.getElementById("overlay").style.display="flex";}
-function closeImage(){document.getElementById("overlay").style.display="none";}
+
+function openZoom(src,name){
+  document.getElementById("zoomImage").src=src;
+  document.getElementById("zoomWM").innerText=name;
+  document.getElementById("overlay").style.display="flex";
+}
+function closeZoom(){
+  document.getElementById("overlay").style.display="none";
+}
 </script>
 
 </body>
