@@ -1,189 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sri Nagamma Temple</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sri Nagamma Temple</title>
 
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background: #fffaf3;
-      color: #3b2f2f;
-    }
+<style>
+body{
+  font-family:'Segoe UI',sans-serif;
+  margin:0;
+  background:#fffaf3;
+  color:#3b2f2f;
+  overflow-x:hidden;
+}
 
-    header {
-      background: #800000;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
+/* 🌸 FLOWER ANIMATION */
+.flower{
+  position:fixed;
+  top:-50px;
+  font-size:24px;
+  animation:fall linear infinite;
+  z-index:999;
+}
+@keyframes fall{
+  0%{ transform:translateY(-50px) rotate(0deg); opacity:1;}
+  100%{ transform:translateY(110vh) rotate(360deg); opacity:0.8;}
+}
 
-    nav {
-      background: #d4a017;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+/* ANNOUNCEMENT BANNER */
+.announcement{
+  background:gold;
+  color:#800000;
+  text-align:center;
+  padding:10px;
+  font-weight:bold;
+}
 
-    nav a {
-      color: #fff;
-      padding: 10px 15px;
-      text-decoration: none;
-    }
+/* HEADER */
+header{
+  background:#800000;
+  color:#fff;
+  padding:25px 15px;
+  text-align:center;
+  position:relative;
+}
 
-    nav a:hover {
-      background: #b8860b;
-    }
+/* SWASTIK */
+.swastik{
+  position:absolute;
+  top:20px;
+  font-size:36px;
+  color:gold;
+}
+.swastik.left{ left:20px; }
+.swastik.right{ right:20px; }
 
-    section {
-      padding: 30px;
-    }
+/* NAGAMMA IMAGE */
+.nagamma-img{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid gold;
+  animation:glow 2.5s infinite alternate;
+}
+@keyframes glow{
+  from{ box-shadow:0 0 10px gold;}
+  to{ box-shadow:0 0 30px gold;}
+}
 
-    h1, h2 {
-      color: #800000;
-    }
+section{ padding:30px; }
+h1,h2{ color:#800000; }
 
-    footer {
-      background: #3b2f2f;
-      color: #fff;
-      text-align: center;
-      padding: 15px;
-    }
+nav{
+  background:#d4a017;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+nav a{
+  color:#fff;
+  padding:10px 15px;
+  text-decoration:none;
+}
+nav a:hover{ background:#b8860b; }
 
-    .donate-btn {
-      background: #800000;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 5px;
-      text-decoration: none;
-      display: inline-block;
-    }
+/* FESTIVE BOX */
+.festive-box{
+  background:#fff3cd;
+  border-left:6px solid #d4a017;
+  padding:15px;
+  margin:15px 0;
+  border-radius:8px;
+}
 
-    .lang-btn {
-      background: #d4a017;
-      color: #fff;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-  </style>
+/* CALENDAR TABLE */
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+th,td{
+  border:1px solid #ccc;
+  padding:10px;
+  text-align:left;
+}
+th{
+  background:#800000;
+  color:white;
+}
+
+/* FOOTER */
+footer{
+  background:#3b2f2f;
+  color:#fff;
+  text-align:center;
+  padding:20px;
+}
+.footer-dharma{
+  color:gold;
+  font-weight:bold;
+  margin-top:8px;
+}
+</style>
 </head>
 
 <body>
 
+<!-- 🌸 FLOWERS -->
+<script>
+for(let i=0;i<20;i++){
+  let f=document.createElement("div");
+  f.className="flower";
+  f.innerText="🌸";
+  f.style.left=Math.random()*100+"vw";
+  f.style.animationDuration=(5+Math.random()*5)+"s";
+  document.body.appendChild(f);
+}
+</script>
+
+<div class="announcement">
+🔔 Abhishekam every Tuesday, Friday & Sunday at 6:00 AM | Devotees Welcome 🙏
+</div>
+
 <header>
-  <h1 id="title">🕉️ Sri Nagamma Temple</h1>
-  <p id="subtitle">Abode of Divine Energy & Protection</p>
-  <button class="lang-btn" onclick="switchLanguage()">🌐 తెలుగు</button>
+  <div class="swastik left">卐</div>
+  <div class="swastik right">卐</div>
+
+  <img src="images/nagamma.jpeg" class="nagamma-img"><br><br>
+
+  <h1>🕉️ Sri Nagamma Temple</h1>
+  <p>Abode of Divine Energy & Protection</p>
+  <p style="color:gold;font-weight:bold;">Sanātana Dharma</p>
 </header>
 
 <nav>
-  <a href="#about" id="nav-about">About</a>
-  <a href="#rituals" id="nav-rituals">Rituals</a>
-  <a href="#donate" id="nav-donate">Donations</a>
-  <a href="#contact" id="nav-contact">Contact</a>
+  <a href="#about">About</a>
+  <a href="#festivals">Festivals</a>
+  <a href="#calendar">2026 Calendar</a>
+  <a href="#contact">Contact</a>
 </nav>
 
 <section id="about">
-  <h2 id="about-title">About the Temple</h2>
-  <p id="about-text">
-    Sri Nagamma Temple is a sacred shrine dedicated to Goddess Nagamma, symbolizing protection and prosperity.
-  </p>
+<h2>About the Temple</h2>
+<p>
+Sri Nagamma Temple is a sacred shrine where Goddess Nagamma blesses devotees
+with protection, fertility, prosperity and relief from Sarpa Dosha.
+</p>
 </section>
 
-<section id="rituals">
-  <h2 id="rituals-title">Daily Rituals & Timings</h2>
-  <ul id="rituals-list">
-    <li>Suprabhata Seva – 6 AM</li>
-    <li><strong>Abhishekam – 6 AM (Tuesday, Friday & Sunday)</strong></li>
-    <li>Evening Aarti – 6 PM</li>
-  </ul>
+<section id="festivals">
+<h2>Festive Announcements</h2>
+
+<div class="festive-box">
+<strong>🐍 Naga Panchami</strong><br>
+Special Abhishekam, Milk Offering & Sarpa Dosha Nivaranam Pooja
+</div>
+
+<div class="festive-box">
+<strong>🔥 Karthika Masam</strong><br>
+Deepa Aaradhana every Monday & Thursday evening
+</div>
+
+<div class="festive-box">
+<strong>🌺 Navaratri</strong><br>
+Alankaram, Kumkuma Archana & Cultural Programs
+</div>
 </section>
 
-<section id="donate">
-  <h2 id="donate-title">Donations</h2>
-  <a class="donate-btn"
-     href="upi://pay?pa=8328572062@ybl&pn=Sri%20Nagamma%20Temple&cu=INR">
-    💰 Donate via UPI
-  </a>
+<section id="calendar">
+<h2>📅 Temple Events Calendar – 2026</h2>
+
+<table>
+<tr>
+<th>Date</th>
+<th>Event</th>
+<th>Details</th>
+</tr>
+<tr>
+<td>Jan 21, 2026</td>
+<td>Naga Panchami</td>
+<td>Special Abhishekam & Milk Pooja</td>
+</tr>
+<tr>
+<td>Mar 22 – Apr 1</td>
+<td>Navaratri</td>
+<td>Daily Alankaram & Devi Pooja</td>
+</tr>
+<tr>
+<td>Jul – Aug</td>
+<td>Shravana Masam</td>
+<td>Friday Abhishekam Special</td>
+</tr>
+<tr>
+<td>Nov</td>
+<td>Karthika Masam</td>
+<td>Deepa Aaradhana</td>
+</tr>
+<tr>
+<td>Every Tue, Fri, Sun</td>
+<td>Abhishekam</td>
+<td>Morning 6:00 AM</td>
+</tr>
+</table>
 </section>
 
 <section id="contact">
-  <h2 id="contact-title">Contact Us</h2>
-  <p id="contact-text">
-    Sri Nagamma Temple, Sadum (Thimmanayanapalli), Andhra Pradesh<br>
-    📞 +91-8328572062
-  </p>
+<h2>Contact</h2>
+<p>
+📞 +91-8328572062<br>
+📞 +91-9032278106<br><br>
+✉️ bujja.sreenivas@gmail.com<br>
+✉️ bujjaravishankar@gmail.com
+</p>
 </section>
 
 <footer>
-  © 2025 Sri Nagamma Temple
+© 2025 Sri Nagamma Temple
+<div class="footer-dharma">🕉️ Sanātana Dharma – Eternal Way of Life 🕉️</div>
 </footer>
-
-<script>
-  let telugu = false;
-
-  function switchLanguage() {
-    telugu = !telugu;
-
-    if (telugu) {
-      // TELUGU
-      document.getElementById("title").innerText = "🕉️ శ్రీ నాగమ్మ ఆలయం";
-      document.getElementById("subtitle").innerText = "దైవిక శక్తి మరియు రక్షణ ఆలయం";
-
-      document.getElementById("nav-about").innerText = "గురించి";
-      document.getElementById("nav-rituals").innerText = "దినచర్యలు";
-      document.getElementById("nav-donate").innerText = "దానం";
-      document.getElementById("nav-contact").innerText = "సంప్రదించండి";
-
-      document.getElementById("about-title").innerText = "ఆలయం గురించి";
-      document.getElementById("about-text").innerText =
-        "శ్రీ నాగమ్మ ఆలయం దైవిక రక్షణ మరియు శ్రేయస్సుకు ప్రతీక.";
-
-      document.getElementById("rituals-title").innerText = "రోజువారీ సేవలు & సమయాలు";
-      document.getElementById("rituals-list").innerHTML = `
-        <li>సుప్రభాత సేవ – ఉదయం 6 గంటలకు</li>
-        <li><strong>అభిషేకం – ఉదయం 6 గంటలకు (మంగళవారం, శుక్రవారం & ఆదివారం)</strong></li>
-        <li>సాయంత్రం హారతి – సాయంత్రం 6 గంటలకు</li>
-      `;
-
-      document.getElementById("donate-title").innerText = "దానం";
-      document.getElementById("contact-title").innerText = "సంప్రదించండి";
-
-      document.querySelector(".lang-btn").innerText = "🌐 English";
-
-    } else {
-      // ENGLISH
-      document.getElementById("title").innerText = "🕉️ Sri Nagamma Temple";
-      document.getElementById("subtitle").innerText = "Abode of Divine Energy & Protection";
-
-      document.getElementById("nav-about").innerText = "About";
-      document.getElementById("nav-rituals").innerText = "Rituals";
-      document.getElementById("nav-donate").innerText = "Donations";
-      document.getElementById("nav-contact").innerText = "Contact";
-
-      document.getElementById("about-title").innerText = "About the Temple";
-      document.getElementById("about-text").innerText =
-        "Sri Nagamma Temple is a sacred shrine dedicated to Goddess Nagamma, symbolizing protection and prosperity.";
-
-      document.getElementById("rituals-title").innerText = "Daily Rituals & Timings";
-      document.getElementById("rituals-list").innerHTML = `
-        <li>Suprabhata Seva – 6 AM</li>
-        <li><strong>Abhishekam – 6 AM (Tuesday, Friday & Sunday)</strong></li>
-        <li>Evening Aarti – 6 PM</li>
-      `;
-
-      document.getElementById("donate-title").innerText = "Donations";
-      document.getElementById("contact-title").innerText = "Contact Us";
-
-      document.querySelector(".lang-btn").innerText = "🌐 తెలుగు";
-    }
-  }
-</script>
 
 </body>
 </html>
