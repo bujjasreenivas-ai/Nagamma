@@ -14,7 +14,7 @@ body{
   overflow-x:hidden;
 }
 
-/* 🌼 FLOWERS */
+/* FLOWERS */
 .flower{
   position:fixed;
   top:-40px;
@@ -83,35 +83,26 @@ header{
   font-weight:bold;
 }
 
-nav{
-  background:#d4a017;
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-nav a{
-  color:#fff;
-  padding:10px 15px;
-  text-decoration:none;
-  font-weight:bold;
-}
-nav a:hover{background:#b8860b;}
-
 section{padding:30px;}
 h1,h2{color:#800000;}
 
-.symbols{
-  font-size:22px;
-  text-align:center;
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+th,td{
+  border:1px solid #ccc;
+  padding:8px;
+}
+th{
+  background:#800000;
+  color:#fff;
 }
 
-.mantra{
-  background:#fff3cd;
-  padding:15px;
-  border-left:6px solid #d4a017;
-  border-radius:8px;
-  font-weight:bold;
-}
+.govt{background:#e3f2fd;}
+.pournami{background:#fff9c4;font-weight:bold;}
+.amavasya{background:#ede7f6;font-weight:bold;}
+.temple{background:#fce4ec;font-weight:bold;}
 
 iframe{
   width:100%;
@@ -163,9 +154,8 @@ footer{
 
 <body>
 
-<!-- 🌼 FLOWERS -->
 <script>
-for(let i=0;i<25;i++){
+for(let i=0;i<20;i++){
   let f=document.createElement("div");
   f.className="flower";
   f.innerText="🌼";
@@ -175,7 +165,6 @@ for(let i=0;i<25;i++){
 }
 </script>
 
-<!-- 🔔 OM SOUND -->
 <audio id="omSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_50e6e5b88f.mp3"></audio>
 <script>
 document.addEventListener("click",()=>{
@@ -197,53 +186,15 @@ document.addEventListener("click",()=>{
 
   <h1 id="title">🕉️ Sri Nagamma Temple</h1>
   <p id="subtitle">Abode of Divine Energy & Protection</p>
-
   <button class="lang-btn" onclick="toggleLang()">🌐 తెలుగు</button>
 </header>
 
-<section id="about">
-<h2 id="about-title">Goddess Nagamma</h2>
-
-<p id="about-text">
-Goddess Nagamma is the powerful Serpent Goddess, protector of life, health, lineage, and justice.
-</p>
-
-<div class="symbols">🐍 Protection • 🌕 Pournami • 🌑 Amavasya • 🛕 Sanatana Dharma</div>
-</section>
-
 <section>
-<h2 id="mantra-title">Prayer / Mantra</h2>
-<div class="mantra" id="mantra-text">
-ॐ శ్రీ నాగమ్మ దేవ్యై నమః 🙏
-</div>
-</section>
-
-<section>
-<h2 id="dosha-title">Sarpa Dosha</h2>
-<p id="dosha-text">
-Worship of Goddess Nagamma is believed to remove Sarpa Dosha and bring peace and prosperity.
-</p>
-</section>
-
-<section id="location">
-<h2 id="loc-title">Temple Location</h2>
-
-<iframe
-src="https://www.google.com/maps?q=Sri+Nagamma+Temple+Sadum+Andhra+Pradesh&output=embed"
-loading="lazy"></iframe>
-
-<div style="text-align:center;margin-top:15px;">
-<a href="https://www.google.com/maps/search/?api=1&query=Sri+Nagamma+Temple+Sadum+Andhra+Pradesh"
-target="_blank"
-style="padding:10px 16px;background:#1a73e8;color:white;border-radius:25px;text-decoration:none;font-weight:bold;">
-📍 Open in Google Maps
-</a>
-
-<a href="#" onclick="getDirections()"
-style="padding:10px 16px;background:#0f9d58;color:white;border-radius:25px;text-decoration:none;font-weight:bold;margin-left:10px;">
-🧭 Get Directions
-</a>
-</div>
+<h2 id="calendar-title">📅 2026 Temple Calendar</h2>
+<table>
+<tr><th>Date</th><th>Day</th><th>Event</th></tr>
+<tbody id="calendarBody"></tbody>
+</table>
 </section>
 
 <footer id="footer-text">
@@ -251,7 +202,6 @@ style="padding:10px 16px;background:#0f9d58;color:white;border-radius:25px;text-
 🕉️ Sanatana Dharma – Eternal Way of Life
 </footer>
 
-<!-- ZOOM -->
 <div class="overlay" id="overlay">
 <span onclick="closeZoom()">✖</span>
 <img id="zoomImage">
@@ -261,43 +211,50 @@ style="padding:10px 16px;background:#0f9d58;color:white;border-radius:25px;text-
 <script>
 let telugu=false;
 
-function toggleLang(){
-telugu=!telugu;
-document.getElementById("title").innerText=telugu?"🕉️ శ్రీ నాగమ్మ ఆలయం":"🕉️ Sri Nagamma Temple";
-document.getElementById("subtitle").innerText=telugu?"దైవిక శక్తి మరియు రక్షణ ఆలయం":"Abode of Divine Energy & Protection";
-document.getElementById("about-title").innerText=telugu?"శ్రీ నాగమ్మ దేవి":"Goddess Nagamma";
-document.getElementById("about-text").innerText=telugu?
-"శ్రీ నాగమ్మ దేవి జీవితం, ఆరోగ్యం, వంశ పరంపరను రక్షించే శక్తివంతమైన నాగ దేవత.":
-"Goddess Nagamma is the powerful Serpent Goddess, protector of life, health, lineage, and justice.";
-document.getElementById("mantra-title").innerText=telugu?"మంత్రం":"Prayer / Mantra";
-document.getElementById("mantra-text").innerText=telugu?
-"ॐ శ్రీ నాగమ్మ దేవ్యై నమః 🙏":
-"Om Sri Nagamma Devyai Namaha 🙏";
-document.getElementById("dosha-title").innerText=telugu?"సర్ప దోషం":"Sarpa Dosha";
-document.getElementById("dosha-text").innerText=telugu?
-"నాగమ్మ దేవిని ఆరాధించడం వల్ల సర్ప దోష నివారణ జరుగుతుంది.":
-"Worship of Goddess Nagamma is believed to remove Sarpa Dosha and bring peace and prosperity.";
-document.getElementById("loc-title").innerText=telugu?"ఆలయ స్థానం":"Temple Location";
-document.getElementById("footer-text").innerHTML=telugu?
-"© 2025 శ్రీ నాగమ్మ ఆలయం<br>🕉️ సనాతన ధర్మం – శాశ్వత జీవన మార్గం":
-"© 2025 Sri Nagamma Temple<br>🕉️ Sanatana Dharma – Eternal Way of Life";
-document.querySelector(".lang-btn").innerText=telugu?"🌐 English":"🌐 తెలుగు";
-}
+const calendar2026=[
+{d:"2026-01-01",day:"Thu",en:"New Year (Govt Holiday)",te:"నూతన సంవత్సరం",c:"govt"},
+{d:"2026-01-14",day:"Wed",en:"Sankranti (AP Holiday)",te:"సంక్రాంతి",c:"govt"},
+{d:"2026-01-21",day:"Wed",en:"Pournami",te:"పౌర్ణమి",c:"pournami"},
+{d:"2026-02-19",day:"Thu",en:"Amavasya",te:"అమావాస్య",c:"amavasya"},
+{d:"2026-03-20",day:"Fri",en:"Ugadi (AP Holiday)",te:"ఉగాది",c:"govt"},
+{d:"2026-08-15",day:"Sat",en:"Independence Day",te:"స్వాతంత్ర్య దినోత్సవం",c:"govt"},
+{d:"2026-10-02",day:"Fri",en:"Gandhi Jayanthi",te:"గాంధీ జయంతి",c:"govt"},
+{d:"2026-07-29",day:"Wed",en:"Naga Panchami",te:"నాగ పంచమి",c:"temple"}
+];
 
-function getDirections(){
-navigator.geolocation.getCurrentPosition(pos=>{
-const url=`https://www.google.com/maps/dir/?api=1&origin=${pos.coords.latitude},${pos.coords.longitude}&destination=Sri+Nagamma+Temple+Sadum+Andhra+Pradesh`;
-window.open(url,"_blank");
-});
+function renderCalendar(){
+  const body=document.getElementById("calendarBody");
+  body.innerHTML="";
+  calendar2026.forEach(e=>{
+    body.innerHTML+=`
+      <tr class="${e.c}">
+        <td>${e.d}</td>
+        <td>${e.day}</td>
+        <td>${telugu?e.te:e.en}</td>
+      </tr>`;
+  });
+}
+renderCalendar();
+
+function toggleLang(){
+  telugu=!telugu;
+  document.getElementById("title").innerText=telugu?"🕉️ శ్రీ నాగమ్మ ఆలయం":"🕉️ Sri Nagamma Temple";
+  document.getElementById("subtitle").innerText=telugu?"దైవిక శక్తి మరియు రక్షణ ఆలయం":"Abode of Divine Energy & Protection";
+  document.getElementById("calendar-title").innerText=telugu?"📅 2026 ఆలయ క్యాలెండర్":"📅 2026 Temple Calendar";
+  document.getElementById("footer-text").innerHTML=telugu?
+    "© 2025 శ్రీ నాగమ్మ ఆలయం<br>🕉️ సనాతన ధర్మం – శాశ్వత జీవన మార్గం":
+    "© 2025 Sri Nagamma Temple<br>🕉️ Sanatana Dharma – Eternal Way of Life";
+  document.querySelector(".lang-btn").innerText=telugu?"🌐 English":"🌐 తెలుగు";
+  renderCalendar();
 }
 
 function openZoom(src,name){
-document.getElementById("zoomImage").src=src;
-document.getElementById("zoomWM").innerText=name;
-document.getElementById("overlay").style.display="flex";
+  document.getElementById("zoomImage").src=src;
+  document.getElementById("zoomWM").innerText=name;
+  document.getElementById("overlay").style.display="flex";
 }
 function closeZoom(){
-document.getElementById("overlay").style.display="none";
+  document.getElementById("overlay").style.display="none";
 }
 </script>
 
