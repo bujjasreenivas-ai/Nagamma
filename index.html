@@ -14,7 +14,7 @@ body{
   overflow-x:hidden;
 }
 
-/* FLOWERS */
+/* 🌼 FLOWER ANIMATION */
 .flower{
   position:fixed;
   top:-40px;
@@ -107,23 +107,6 @@ h2{color:#800000;}
   cursor:pointer;
 }
 
-/* CALENDAR */
-table{
-  width:100%;
-  border-collapse:collapse;
-}
-th,td{
-  border:1px solid #ccc;
-  padding:8px;
-}
-th{
-  background:#800000;
-  color:white;
-}
-.govt{background:#e3f2fd;}
-.pournami{background:#fff9c4;font-weight:bold;}
-.amavasya{background:#ede7f6;font-weight:bold;}
-
 /* DONATION */
 .donation{
   background:#fff3cd;
@@ -154,6 +137,7 @@ iframe{
   border-radius:10px;
 }
 
+/* MAP BUTTONS */
 .map-buttons a{
   display:inline-block;
   margin:8px;
@@ -201,7 +185,7 @@ footer{
 
 <body>
 
-<!-- FLOWERS -->
+<!-- 🌼 FLOWERS -->
 <script>
 for(let i=0;i<35;i++){
   const f=document.createElement("div");
@@ -213,12 +197,12 @@ for(let i=0;i<35;i++){
 }
 </script>
 
-<!-- OM SOUND -->
+<!-- 🔔 OM SOUND -->
 <audio id="omSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_50e6e5b88f.mp3"></audio>
 <script>
 document.addEventListener("click",()=>{
-  const a=document.getElementById("omSound");
-  if(a.paused) a.play().catch(()=>{});
+  const om=document.getElementById("omSound");
+  if(om.paused) om.play().catch(()=>{});
 },{once:true});
 </script>
 
@@ -235,13 +219,11 @@ document.addEventListener("click",()=>{
 </header>
 
 <nav>
-  <a id="nav-about" href="#about">About</a>
-  <a id="nav-founders" href="#founders">Founders</a>
-  <a id="nav-calendar" href="#calendar">Calendar</a>
-  <a href="#donation" id="nav-donation">Donation</a>
-  <a href="#dosha" id="nav-dosha">Sarpa Dosha</a>
-  <a id="nav-location" href="#location">Location</a>
-  <a id="nav-contact" href="#contact">Contact</a>
+  <a href="#about">About</a>
+  <a href="#founders">Founders</a>
+  <a href="#donation">Donation</a>
+  <a href="#location">Location</a>
+  <a href="#contact">Contact</a>
 </nav>
 
 <section id="about">
@@ -249,34 +231,47 @@ document.addEventListener("click",()=>{
 <p id="about-text"></p>
 </section>
 
+<section id="founders">
+<h2 id="founders-title">Temple Founders</h2>
+<div class="founders">
+  <div class="founder-card">
+    <img src="images/ravishankar.jpeg" onclick="openZoom(this.src)">
+    <b>BUJJA RAVISHANKAR</b><br><span id="f1">Founder</span>
+  </div>
+  <div class="founder-card">
+    <img src="images/navaneethamma.jpeg" onclick="openZoom(this.src)">
+    <b>BUJJA NAVANEETHAMMA</b><br><span id="f2">Founder</span>
+  </div>
+</div>
+</section>
+
 <section id="donation">
 <h2 id="donation-title">Donation</h2>
 <div class="donation" id="donation-text"></div>
-<p><b>UPI:</b> <span onclick="navigator.clipboard.writeText('8328572062@ybl')">8328572062@ybl 📋</span></p>
-<img src="images/upi-qr.jpeg" width="180">
-</section>
-
-<section id="dosha">
-<h2 id="dosha-title">Sarpa Dosha</h2>
-<p id="dosha-text"></p>
-</section>
-
-<section id="calendar">
-<h2 id="calendar-title">📅 2026 Temple Calendar</h2>
-<button onclick="window.print()">🖨️ Print Calendar</button>
-<table>
-<tr><th>Date</th><th>Day</th><th>Event</th></tr>
-<tbody id="calendarBody"></tbody>
-</table>
+<p>
+<b>UPI:</b>
+<span onclick="navigator.clipboard.writeText('8328572062@ybl')">
+8328572062@ybl 📋
+</span>
+</p>
 </section>
 
 <section id="location">
 <h2 id="loc-title">Temple Location</h2>
-<iframe src="https://maps.google.com/maps?q=Sri%20Nagamma%20Temple%20Sadum%20Andhra%20Pradesh&z=15&output=embed"></iframe>
+
+<iframe
+src="https://www.google.com/maps?q=Sri+Nagamma+Temple+Sadum+Andhra+Pradesh&z=16&output=embed">
+</iframe>
+
 <div class="map-buttons">
 <a class="map-view" target="_blank"
-href="https://www.google.com/maps/search/?api=1&query=Sri+Nagamma+Temple+Sadum+Andhra+Pradesh">📍 View in Maps</a>
-<a class="map-dir" href="#" onclick="getDirections()">🧭 Get Directions</a>
+href="https://maps.app.goo.gl/AUMSPHwV4DB1h9Nj7">
+📍 View in Google Maps
+</a>
+
+<a class="map-dir" href="#" onclick="getDirections()">
+🧭 Get Directions
+</a>
 </div>
 </section>
 
@@ -284,14 +279,14 @@ href="https://www.google.com/maps/search/?api=1&query=Sri+Nagamma+Temple+Sadum+A
 <h2 id="contact-title">Contact</h2>
 <div class="contact">
 <a class="call" href="tel:+918328572062">📞 8328572062</a>
-<a class="call" href="tel:+919032278106">📞 9032278106</a><br>
-<a class="whatsapp" href="https://wa.me/918328572062">💬 WhatsApp</a><br>
-<a class="email" href="mailto:bujja.sreenivas@gmail.com">✉️ Sreenivas</a>
+<a class="whatsapp" href="https://wa.me/918328572062">💬 WhatsApp</a>
+<a class="email" href="mailto:bujja.sreenivas@gmail.com">✉️ Email</a>
 </div>
 </section>
 
 <footer id="footer-text"></footer>
 
+<!-- IMAGE ZOOM -->
 <div class="overlay" id="overlay">
 <span onclick="closeZoom()">✖</span>
 <img id="zoomImage">
@@ -302,51 +297,37 @@ let telugu=false;
 
 const TEXT={
 en:{
-about:"Goddess Nagamma is the divine Serpent Mother protecting life, health, fertility, land and lineage. Worship removes Sarpa Dosha.",
-donation:"Support temple rituals, abhishekam and annadanam through your generous donation.",
-dosha:"Sarpa Dosha is caused due to Nāga imbalance. Worship of Nagamma Devi grants relief and peace.",
+about:"Goddess Nagamma is the divine Serpent Mother protecting families, land, health and lineage.",
+donation:"Support temple rituals, abhishekam and annadanam through your donation.",
 footer:"© 2025 Sri Nagamma Temple<br>🕉️ Sanatana Dharma – Eternal Way of Life"
 },
 te:{
-about:"శ్రీ నాగమ్మ దేవి జీవితం, ఆరోగ్యం, సంతానం, భూమి మరియు వంశాన్ని రక్షించే పరమ నాగమాత.",
+about:"శ్రీ నాగమ్మ దేవి కుటుంబం, ఆరోగ్యం, భూమి మరియు వంశాన్ని రక్షించే పరమ నాగమాత.",
 donation:"అభిషేకాలు మరియు అన్నదాన సేవలకు మీ విరాళం అందించండి.",
-dosha:"సర్ప దోషం నాగ తత్త్వ అసమతుల్యత వల్ల ఏర్పడుతుంది. నాగమ్మ దేవి ఆరాధన శాంతిని ఇస్తుంది.",
 footer:"© 2025 శ్రీ నాగమ్మ ఆలయం<br>🕉️ సనాతన ధర్మం – శాశ్వత జీవన మార్గం"
 }
 };
-
-const calendar2026=[
-{d:"2026-01-01",day:"Thu",en:"New Year",te:"నూతన సంవత్సరం",c:"govt"},
-{d:"2026-01-21",day:"Wed",en:"Pournami",te:"పౌర్ణమి",c:"pournami"},
-{d:"2026-02-19",day:"Thu",en:"Amavasya",te:"అమావాస్య",c:"amavasya"}
-];
-
-function renderCalendar(){
-const body=document.getElementById("calendarBody");
-body.innerHTML="";
-calendar2026.forEach(e=>{
-body.innerHTML+=`<tr class="${e.c}">
-<td>${e.d}</td><td>${e.day}</td><td>${telugu?e.te:e.en}</td></tr>`;
-});
-}
 
 function toggleLang(){
 telugu=!telugu;
 const L=telugu?TEXT.te:TEXT.en;
 document.getElementById("about-text").innerText=L.about;
 document.getElementById("donation-text").innerText=L.donation;
-document.getElementById("dosha-text").innerText=L.dosha;
 document.getElementById("footer-text").innerHTML=L.footer;
+document.getElementById("founders-title").innerText=telugu?"ఆలయ స్థాపకులు":"Temple Founders";
+document.getElementById("f1").innerText=telugu?"స్థాపకుడు":"Founder";
+document.getElementById("f2").innerText=telugu?"స్థాపకురాలు":"Founder";
 document.querySelector(".lang-btn").innerText=telugu?"🌐 English":"🌐 తెలుగు";
-renderCalendar();
 }
 
-renderCalendar();
 toggleLang();toggleLang();
 
 function getDirections(){
 navigator.geolocation.getCurrentPosition(p=>{
-window.open(`https://www.google.com/maps/dir/?api=1&origin=${p.coords.latitude},${p.coords.longitude}&destination=Sri+Nagamma+Temple+Sadum+Andhra+Pradesh`);
+window.open(
+`https://www.google.com/maps/dir/?api=1&origin=${p.coords.latitude},${p.coords.longitude}&destination=Sri+Nagamma+Temple+Sadum+Andhra+Pradesh`,
+"_blank"
+);
 });
 }
 
