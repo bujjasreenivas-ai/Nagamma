@@ -71,43 +71,34 @@ nav a:hover{background:#b8860b;}
 section{padding:30px;}
 h1,h2{color:#800000;}
 
-/* FOUNDERS */
-.founders{
-  display:flex;
-  gap:20px;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-.founder-card{
-  background:#fff;
-  padding:15px;
-  width:220px;
-  text-align:center;
-  border-radius:12px;
-}
-.founder-card img{
-  width:130px;
-  height:130px;
-  border-radius:50%;
-  border:3px solid gold;
-  cursor:pointer;
-}
-
-/* CALENDAR */
 #calendarTable{
   width:100%;
   border-collapse:collapse;
+  margin-top:15px;
 }
 #calendarTable th,#calendarTable td{
   border:1px solid #ccc;
   padding:8px;
 }
-#calendarTable th{background:#800000;color:white;}
+#calendarTable th{
+  background:#800000;
+  color:white;
+}
 
 .govt{background:#e3f2fd;}
 .pournami{background:#fff9c4;font-weight:bold;}
 .amavasya{background:#ede7f6;font-weight:bold;}
 .temple{background:#fce4ec;font-weight:bold;}
+
+.donate-btn{
+  display:inline-block;
+  padding:12px 20px;
+  background:#800000;
+  color:white;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+}
 
 footer{
   background:#3b2f2f;
@@ -116,12 +107,11 @@ footer{
   padding:20px;
 }
 
-/* ZOOM */
 .overlay{
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.9);
+  background:rgba(0,0,0,0.9);
   justify-content:center;
   align-items:center;
   z-index:9999;
@@ -136,12 +126,12 @@ footer{
   top:20px;
   right:30px;
   font-size:30px;
-  color:white;
+  color:#fff;
   cursor:pointer;
 }
 .overlay .wm{
   position:absolute;
-  bottom:25px;
+  bottom:30px;
   font-size:22px;
   color:gold;
   font-weight:bold;
@@ -160,11 +150,11 @@ footer{
   <div class="swastik right">卐</div>
 
   <img src="images/nagamma.jpeg" class="nagamma-img"
-   onclick="openZoom(this.src,'శ్రీ నాగమ్మ దేవి')">
+       onclick="openZoom('images/nagamma.jpeg','శ్రీ నాగమ్మ దేవి')">
 
   <h1 id="title">🕉️ Sri Nagamma Temple</h1>
   <p id="subtitle">Abode of Divine Energy & Protection</p>
-  <p id="dharma" style="color:gold;font-weight:bold;">Sanatana Dharma</p>
+  <p style="color:gold;font-weight:bold;" id="dharma">Sanatana Dharma</p>
 
   <button class="lang-btn" onclick="toggleLang()">🌐 తెలుగు</button>
 </header>
@@ -186,26 +176,9 @@ Sri Nagamma Temple is a sacred shrine dedicated to Goddess Nagamma.
 
 <section id="founders">
 <h2 id="founders-title">Temple Founders & Contributor</h2>
-
-<div class="founders">
-  <div class="founder-card">
-    <img src="images/founders/ravishankar.jpeg"
-     onclick="openZoom(this.src,'బుజ్జా రవిశంకర్')">
-    <p id="founder1">Founder: BUJJA RAVISHANKAR</p>
-  </div>
-
-  <div class="founder-card">
-    <img src="images/founders/navaneethamma.jpeg"
-     onclick="openZoom(this.src,'బుజ్జా నవనీతమ్మ')">
-    <p id="founder2">Founder: BUJJA NAVANEETHAMMA</p>
-  </div>
-
-  <div class="founder-card">
-    <img src="images/founders/sreenivas.jpeg"
-     onclick="openZoom(this.src,'బుజ్జా శ్రీనివాస్')">
-    <p id="contributor">Contributor: BUJJA SREENIVAS</p>
-  </div>
-</div>
+<p id="founder1">Founder: BUJJA RAVISHANKAR</p>
+<p id="founder2">Founder: BUJJA NAVANEETHAMMA</p>
+<p id="contributor">Contributor: BUJJA SREENIVAS</p>
 </section>
 
 <section id="calendar">
@@ -214,9 +187,9 @@ Sri Nagamma Temple is a sacred shrine dedicated to Goddess Nagamma.
 <table id="calendarTable">
 <thead>
 <tr>
-<th id="th-date">Date</th>
-<th id="th-day">Day</th>
-<th id="th-event">Event</th>
+  <th id="th-date">Date</th>
+  <th id="th-day">Day</th>
+  <th id="th-event">Event</th>
 </tr>
 </thead>
 <tbody id="calendarBody"></tbody>
@@ -226,7 +199,12 @@ Sri Nagamma Temple is a sacred shrine dedicated to Goddess Nagamma.
 <section id="donate">
 <h2 id="donate-title">Donations</h2>
 <p id="donate-text">Support temple activities and poojas.</p>
-<b>UPI:</b> 8328572062@ybl
+<p><b>UPI:</b> 8328572062@ybl</p>
+
+<a class="donate-btn"
+href="upi://pay?pa=8328572062@ybl&pn=Sri%20Nagamma%20Temple&cu=INR">
+💰 Donate via UPI
+</a>
 </section>
 
 <section id="contact">
@@ -244,88 +222,91 @@ Sri Nagamma Temple is a sacred shrine dedicated to Goddess Nagamma.
 </footer>
 
 <div class="overlay" id="overlay">
-<span onclick="closeZoom()">✖</span>
-<img id="zoomImage">
-<div class="wm" id="zoomWM"></div>
+  <span onclick="closeZoom()">✖</span>
+  <img id="zoomImage">
+  <div class="wm" id="zoomWM"></div>
 </div>
 
 <script>
 let telugu=false;
 
 const textMap={
-title:["🕉️ Sri Nagamma Temple","🕉️ శ్రీ నాగమ్మ ఆలయం"],
-subtitle:["Abode of Divine Energy & Protection","దైవిక శక్తి మరియు రక్షణ ఆలయం"],
-dharma:["Sanatana Dharma","సనాతన ధర్మం"],
-announce:["🔔 Abhishekam every Tuesday, Friday & Sunday at 6:00 AM",
-"🔔 ప్రతి మంగళవారం, శుక్రవారం మరియు ఆదివారం ఉదయం 6 గంటలకు అభిషేకం"],
-"nav-about":["About","గురించి"],
-"nav-founders":["Founders","స్థాపకులు"],
-"nav-calendar":["Calendar","క్యాలెండర్"],
-"nav-donate":["Donations","దానం"],
-"nav-contact":["Contact","సంప్రదించండి"],
-"about-title":["About the Temple","ఆలయం గురించి"],
-"about-text":["Sri Nagamma Temple is a sacred shrine dedicated to Goddess Nagamma.",
-"శ్రీ నాగమ్మ ఆలయం దేవి నాగమ్మకు అంకితమైన పవిత్ర ఆలయం."],
-"founders-title":["Temple Founders & Contributor","ఆలయ స్థాపకులు & సహకారులు"],
-founder1:["Founder: BUJJA RAVISHANKAR","స్థాపకుడు: బుజ్జా రవిశంకర్"],
-founder2:["Founder: BUJJA NAVANEETHAMMA","స్థాపకురాలు: బుజ్జా నవనీతమ్మ"],
-contributor:["Contributor: BUJJA SREENIVAS","సహకారి: బుజ్జా శ్రీనివాస్"],
-"calendar-title":["📅 2026 Temple Calendar","📅 2026 ఆలయ క్యాలెండర్"],
-"th-date":["Date","తేదీ"],
-"th-day":["Day","వారం"],
-"th-event":["Event","కార్యక్రమం"],
-"donate-title":["Donations","దానం"],
-"donate-text":["Support temple activities and poojas.","ఆలయ సేవలకు మీ సహకారం అందించండి."],
-"contact-title":["Contact","సంప్రదించండి"],
-"contact-text":["📍 Sadum (Thimmanayanapalli), Andhra Pradesh<br>📞 8328572062 / 9032278106<br>✉️ bujja.sreenivas@gmail.com",
-"📍 సదుం (తిమ్మనాయనపల్లి), ఆంధ్రప్రదేశ్<br>📞 8328572062 / 9032278106<br>✉️ bujja.sreenivas@gmail.com"],
-"footer-text":["© 2025 Sri Nagamma Temple<br>🕉️ Sanatana Dharma – Eternal Way of Life",
-"© 2025 శ్రీ నాగమ్మ ఆలయం<br>🕉️ సనాతన ధర్మం – శాశ్వత జీవన మార్గం"]
+  title:["🕉️ Sri Nagamma Temple","🕉️ శ్రీ నాగమ్మ ఆలయం"],
+  subtitle:["Abode of Divine Energy & Protection","దైవిక శక్తి మరియు రక్షణ ఆలయం"],
+  dharma:["Sanatana Dharma","సనాతన ధర్మం"],
+  announce:[
+    "🔔 Abhishekam every Tuesday, Friday & Sunday at 6:00 AM",
+    "🔔 ప్రతి మంగళవారం, శుక్రవారం మరియు ఆదివారం ఉదయం 6 గంటలకు అభిషేకం"
+  ],
+  "nav-about":["About","గురించి"],
+  "nav-founders":["Founders","స్థాపకులు"],
+  "nav-calendar":["Calendar","క్యాలెండర్"],
+  "nav-donate":["Donations","దానం"],
+  "nav-contact":["Contact","సంప్రదించండి"],
+  "about-title":["About the Temple","ఆలయం గురించి"],
+  "about-text":[
+    "Sri Nagamma Temple is a sacred shrine dedicated to Goddess Nagamma.",
+    "శ్రీ నాగమ్మ ఆలయం దేవి నాగమ్మకు అంకితమైన పవిత్ర ఆలయం."
+  ],
+  "founders-title":["Temple Founders & Contributor","ఆలయ స్థాపకులు & సహకారులు"],
+  founder1:["Founder: BUJJA RAVISHANKAR","స్థాపకుడు: బుజ్జా రవిశంకర్"],
+  founder2:["Founder: BUJJA NAVANEETHAMMA","స్థాపకురాలు: బుజ్జా నవనీతమ్మ"],
+  contributor:["Contributor: BUJJA SREENIVAS","సహకారి: బుజ్జా శ్రీనివాస్"],
+  "calendar-title":["📅 2026 Temple Calendar","📅 2026 ఆలయ క్యాలెండర్"],
+  "th-date":["Date","తేదీ"],
+  "th-day":["Day","వారం"],
+  "th-event":["Event","కార్యక్రమం"],
+  "donate-title":["Donations","దానం"],
+  "donate-text":["Support temple activities and poojas.","ఆలయ సేవలకు మీ సహకారం అందించండి."],
+  "contact-title":["Contact","సంప్రదించండి"],
+  "contact-text":[
+    "📍 Sadum (Thimmanayanapalli), Andhra Pradesh<br>📞 8328572062 / 9032278106<br>✉️ bujja.sreenivas@gmail.com",
+    "📍 సదుం (తిమ్మనాయనపల్లి), ఆంధ్రప్రదేశ్<br>📞 8328572062 / 9032278106<br>✉️ bujja.sreenivas@gmail.com"
+  ],
+  "footer-text":[
+    "© 2025 Sri Nagamma Temple<br>🕉️ Sanatana Dharma – Eternal Way of Life",
+    "© 2025 శ్రీ నాగమ్మ ఆలయం<br>🕉️ సనాతన ధర్మం – శాశ్వత జీవన మార్గం"
+  ]
 };
 
 const calendar2026=[
-{date:"2026-01-01",day:"Thu",en:"New Year",te:"నూతన సంవత్సరం",type:"govt"},
-{date:"2026-01-21",day:"Wed",en:"Pournami",te:"పౌర్ణమి",type:"pournami"},
-{date:"2026-02-19",day:"Thu",en:"Amavasya",te:"అమావాస్య",type:"amavasya"},
-{date:"2026-07-29",day:"Wed",en:"Naga Panchami",te:"నాగ పంచమి",type:"temple"}
+{date:"2026-01-01",day:"Thu",en:"New Year",te:"నూతన సంవత్సరం"},
+{date:"2026-01-21",day:"Wed",en:"Pournami",te:"పౌర్ణమి"},
+{date:"2026-02-19",day:"Thu",en:"Amavasya",te:"అమావాస్య"},
+{date:"2026-07-29",day:"Wed",en:"Naga Panchami",te:"నాగ పంచమి"}
 ];
 
 function toggleLang(){
-telugu=!telugu;
-for(const id in textMap){
-const el=document.getElementById(id);
-if(el) el.innerHTML=telugu?textMap[id][1]:textMap[id][0];
-}
-document.querySelector(".lang-btn").innerText=telugu?"🌐 English":"🌐 తెలుగు";
-renderCalendar();
+  telugu=!telugu;
+  for(const id in textMap){
+    const el=document.getElementById(id);
+    if(el) el.innerHTML=telugu?textMap[id][1]:textMap[id][0];
+  }
+  document.querySelector(".lang-btn").innerText=telugu?"🌐 English":"🌐 తెలుగు";
+  renderCalendar();
 }
 
 function renderCalendar(){
-const body=document.getElementById("calendarBody");
-body.innerHTML="";
-calendar2026.forEach(e=>{
-let icon="";
-if(e.type==="pournami") icon=" 🌕";
-if(e.type==="amavasya") icon=" 🌑";
-if(e.type==="temple") icon=" 🐍";
-
-body.innerHTML+=`
-<tr class="${e.type}">
-<td>${e.date}</td>
-<td>${e.day}</td>
-<td>${telugu?e.te:e.en}${icon}</td>
-</tr>`;
-});
+  const body=document.getElementById("calendarBody");
+  body.innerHTML="";
+  calendar2026.forEach(e=>{
+    body.innerHTML+=`
+      <tr>
+        <td>${e.date}</td>
+        <td>${e.day}</td>
+        <td>${telugu?e.te:e.en}</td>
+      </tr>`;
+  });
 }
 renderCalendar();
 
 function openZoom(src,name){
-document.getElementById("zoomImage").src=src;
-document.getElementById("zoomWM").innerText=name;
-document.getElementById("overlay").style.display="flex";
+  document.getElementById("zoomImage").src=src;
+  document.getElementById("zoomWM").innerText=name;
+  document.getElementById("overlay").style.display="flex";
 }
 function closeZoom(){
-document.getElementById("overlay").style.display="none";
+  document.getElementById("overlay").style.display="none";
 }
 </script>
 
