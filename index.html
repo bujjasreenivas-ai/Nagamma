@@ -55,7 +55,6 @@ header{
   cursor:pointer;
 }
 
-/* BUTTON */
 .lang-btn{
   background:#d4a017;
   color:#fff;
@@ -97,7 +96,7 @@ h2{color:#800000;}
   padding:15px;
   border-radius:12px;
   text-align:center;
-  box-shadow:0 2px 8px rgba(0,0,0,0.2);
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
 }
 .founder-card img{
   width:130px;
@@ -117,18 +116,30 @@ h2{color:#800000;}
 }
 
 /* CONTACT */
-.contact a{
-  display:inline-block;
-  margin:6px;
-  padding:10px 16px;
-  border-radius:25px;
-  color:#fff;
-  text-decoration:none;
-  font-weight:bold;
+.contact-box{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:15px;
 }
-.call{background:#28a745;}
-.whatsapp{background:#25D366;}
-.email{background:#0072c6;}
+.contact-card{
+  background:#fff;
+  padding:15px 20px;
+  border-radius:14px;
+  box-shadow:0 6px 15px rgba(0,0,0,0.15);
+  min-width:220px;
+  text-align:center;
+  animation:contactFade 1s ease forwards;
+  opacity:0;
+}
+.contact-card:nth-child(1){animation-delay:.2s}
+.contact-card:nth-child(2){animation-delay:.4s}
+.contact-card:nth-child(3){animation-delay:.6s}
+.contact-card:nth-child(4){animation-delay:.8s}
+@keyframes contactFade{
+  from{transform:translateY(30px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
 
 iframe{
   width:100%;
@@ -211,82 +222,65 @@ document.addEventListener("click",()=>{
   <div class="swastik right">卐</div>
 
   <img src="images/nagamma.jpeg" class="nagamma-img" onclick="openZoom(this.src)">
-
-  <h1 id="title">🕉️ Sri Nagamma Temple</h1>
-  <p id="subtitle">Abode of Divine Energy & Protection</p>
-
+  <h1 id="title"></h1>
+  <p id="subtitle"></p>
   <button class="lang-btn" onclick="toggleLang()">🌐 తెలుగు</button>
 </header>
 
 <nav>
-  <a href="#about">About</a>
-  <a href="#founders">Founders</a>
-  <a href="#donation">Donation</a>
-  <a href="#location">Location</a>
-  <a href="#contact">Contact</a>
+  <a id="nav-about" href="#about"></a>
+  <a id="nav-founders" href="#founders"></a>
+  <a id="nav-donation" href="#donation"></a>
+  <a id="nav-location" href="#location"></a>
+  <a id="nav-contact" href="#contact"></a>
 </nav>
 
 <section id="about">
-<h2 id="about-title">About Goddess Nagamma</h2>
+<h2 id="about-title"></h2>
 <p id="about-text"></p>
 </section>
 
 <section id="founders">
-<h2 id="founders-title">Temple Founders</h2>
+<h2 id="founders-title"></h2>
 <div class="founders">
   <div class="founder-card">
     <img src="images/ravishankar.jpeg" onclick="openZoom(this.src)">
-    <b>BUJJA RAVISHANKAR</b><br><span id="f1">Founder</span>
+    <b>BUJJA RAVISHANKAR</b><br><span id="f1"></span>
   </div>
   <div class="founder-card">
     <img src="images/navaneethamma.jpeg" onclick="openZoom(this.src)">
-    <b>BUJJA NAVANEETHAMMA</b><br><span id="f2">Founder</span>
+    <b>BUJJA NAVANEETHAMMA</b><br><span id="f2"></span>
   </div>
 </div>
 </section>
 
 <section id="donation">
-<h2 id="donation-title">Donation</h2>
+<h2 id="donation-title"></h2>
 <div class="donation" id="donation-text"></div>
-<p>
-<b>UPI:</b>
-<span onclick="navigator.clipboard.writeText('8328572062@ybl')">
-8328572062@ybl 📋
-</span>
-</p>
+<p><b>UPI:</b> <span onclick="navigator.clipboard.writeText('8328572062@ybl')">8328572062@ybl 📋</span></p>
 </section>
 
 <section id="location">
-<h2 id="loc-title">Temple Location</h2>
-
-<iframe
-src="https://www.google.com/maps?q=Sri+Nagamma+Temple+Sadum+Andhra+Pradesh&z=16&output=embed">
-</iframe>
-
+<h2 id="loc-title"></h2>
+<iframe src="https://www.google.com/maps?q=Sri+Nagamma+Temple+Sadum+Andhra+Pradesh&z=16&output=embed"></iframe>
 <div class="map-buttons">
-<a class="map-view" target="_blank"
-href="https://maps.app.goo.gl/AUMSPHwV4DB1h9Nj7">
-📍 View in Google Maps
-</a>
-
-<a class="map-dir" href="#" onclick="getDirections()">
-🧭 Get Directions
-</a>
+<a class="map-view" target="_blank" id="map-view" href="https://maps.app.goo.gl/AUMSPHwV4DB1h9Nj7"></a>
+<a class="map-dir" href="#" id="map-dir" onclick="getDirections()"></a>
 </div>
 </section>
 
 <section id="contact">
-<h2 id="contact-title">Contact</h2>
-<div class="contact">
-<a class="call" href="tel:+918328572062">📞 8328572062</a>
-<a class="whatsapp" href="https://wa.me/918328572062">💬 WhatsApp</a>
-<a class="email" href="mailto:bujja.sreenivas@gmail.com">✉️ Email</a>
+<h2 id="contact-title"></h2>
+<div class="contact-box">
+  <div class="contact-card">📞 8328572062<br>📞 9032278106</div>
+  <div class="contact-card">💬 WhatsApp</div>
+  <div class="contact-card">✉️ bujja.sreenivas@gmail.com</div>
+  <div class="contact-card" id="contact-address"></div>
 </div>
 </section>
 
 <footer id="footer-text"></footer>
 
-<!-- IMAGE ZOOM -->
 <div class="overlay" id="overlay">
 <span onclick="closeZoom()">✖</span>
 <img id="zoomImage">
@@ -295,55 +289,71 @@ href="https://maps.app.goo.gl/AUMSPHwV4DB1h9Nj7">
 <script>
 let telugu=false;
 
-const TEXT={
+const LANG={
 en:{
-about:"Goddess Nagamma Devi is the supreme manifestation of the sacred Nāga Shakti—the divine serpent energy that governs life, protection, fertility, and ancestral balance. She is worshipped as the Serpent Mother, the unseen guardian who protects families, land, health, lineage, and future generations.
-
-Nagamma Devi is believed to dwell where faith is pure and devotion is sincere. Her grace removes Sarpa Dosha, ancestral curses, unexplained obstacles, infertility issues, chronic health problems, and disturbances caused by unseen forces. Devotees experience peace of mind, protection from negativity, prosperity, and spiritual strength through her blessings.
-
-Worship on Amavasya and Pournami is considered extremely powerful, as these sacred days amplify Nāga tattva. Offering milk, turmeric, flowers, and prayers to Nagamma Devi brings harmony in family life, stability in land matters, and divine protection from accidents and misfortune.
-
-Nagamma is both fierce and compassionate—fierce against injustice and negativity, yet deeply compassionate toward her devotees. Those who surrender with faith believe she never turns away sincere prayers.
-
-“Where Nagamma is worshipped, fear disappears and divine protection prevails".",
-donation:"Support temple rituals, abhishekam and annadanam through your donation.",
-footer:"© 2025 Sri Nagamma Temple<br>🕉️ Sanatana Dharma – Eternal Way of Life"
+title:"🕉️ Sri Nagamma Temple",
+subtitle:"Abode of Divine Energy & Protection",
+nav_about:"About",
+nav_founders:"Founders",
+nav_donation:"Donation",
+nav_location:"Location",
+nav_contact:"Contact",
+about_title:"About Goddess Nagamma",
+about_text:"Goddess Nagamma Devi is the supreme Nāga Shakti protecting life, land, health and lineage. Her worship removes Sarpa Dosha and grants divine protection.",
+founders_title:"Temple Founders",
+f1:"Founder",
+f2:"Founder",
+donation_title:"Donation",
+donation_text:"Support temple rituals, abhishekam and annadanam through your donation.",
+loc_title:"Temple Location",
+contact_title:"Contact Details",
+contact_address:"📍 Sri Nagamma Temple, Sadum, Chittoor District, Andhra Pradesh, India",
+map_view:"📍 View in Google Maps",
+map_dir:"🧭 Get Directions",
+footer:"© 2025 Sri Nagamma Temple<br>🕉️ Sanatana Dharma – Eternal Way of Life",
+btn:"🌐 తెలుగు"
 },
 te:{
-about:"శ్శ్రీ నాగమ్మ దేవి పరమ నాగశక్తి స్వరూపిణి. ఆమె జీవితం, ఆరోగ్యం, సంతానం, భూమి, వంశ పరంపర మరియు భవిష్యత్తును రక్షించే దివ్య నాగమాతగా భక్తులచే పూజింపబడుతుంది. నాగమ్మ దేవి అనేది కనిపించని కానీ ఎల్లప్పుడూ కాపాడే దైవ శక్తి.
-
-శ్రీ నాగమ్మ దేవి కృపతో సర్ప దోష నివారణ, పితృ దోష శాంతి, సంతాన సమస్యల నివారణ, భూమి సంబంధిత ఆటంకాల తొలగింపు, అనారోగ్యాల నుంచి విముక్తి మరియు అశుభ శక్తుల నుంచి రక్షణ లభిస్తుందని భక్తుల విశ్వాసం.
-
-అమావాస్య మరియు పౌర్ణమి రోజుల్లో నాగమ్మ దేవి ఆరాధన అత్యంత శక్తివంతమైనదిగా భావిస్తారు. ఆ రోజుల్లో పాలు, పసుపు, పూలతో పూజ చేయడం కుటుంబ శాంతి, ఐశ్వర్యం మరియు దైవ రక్షణను అందిస్తుంది.
-
-నాగమ్మ దేవి ఉగ్ర స్వరూపిణి అయినప్పటికీ కరుణామయి. భక్తితో శరణాగతి చేసినవారి ప్రార్థనలను ఆమె ఎన్నడూ తిరస్కరించదు.
-
-“నాగమ్మ దేవి కృప ఉన్న చోట భయం ఉండదు — దైవ రక్షణ ఉంటుంది.”.",
-donation:"అభిషేకాలు మరియు అన్నదాన సేవలకు మీ విరాళం అందించండి.",
-footer:"© 2025 శ్రీ నాగమ్మ ఆలయం<br>🕉️ సనాతన ధర్మం – శాశ్వత జీవన మార్గం"
+title:"🕉️ శ్రీ నాగమ్మ ఆలయం",
+subtitle:"దైవిక శక్తి మరియు పరమ రక్షణ ఆలయం",
+nav_about:"గురించి",
+nav_founders:"స్థాపకులు",
+nav_donation:"విరాళం",
+nav_location:"స్థానం",
+nav_contact:"సంప్రదించండి",
+about_title:"శ్రీ నాగమ్మ దేవి గురించి",
+about_text:"శ్రీ నాగమ్మ దేవి పరమ నాగశక్తి స్వరూపిణి. ఆమె కృపతో సర్ప దోష నివారణ, కుటుంబ శాంతి మరియు దైవ రక్షణ లభిస్తుంది.",
+founders_title:"ఆలయ స్థాపకులు",
+f1:"స్థాపకుడు",
+f2:"స్థాపకురాలు",
+donation_title:"విరాళం",
+donation_text:"అభిషేకాలు మరియు అన్నదాన సేవలకు మీ విరాళం అందించండి.",
+loc_title:"ఆలయ స్థానం",
+contact_title:"సంప్రదింపు వివరాలు",
+contact_address:"📍 శ్రీ నాగమ్మ ఆలయం, సాదుం, చిత్తూరు జిల్లా, ఆంధ్రప్రదేశ్, భారత్",
+map_view:"📍 గూగుల్ మ్యాప్‌లో చూడండి",
+map_dir:"🧭 దారి చూపించండి",
+footer:"© 2025 శ్రీ నాగమ్మ ఆలయం<br>🕉️ సనాతన ధర్మం – శాశ్వత జీవన మార్గం",
+btn:"🌐 English"
 }
 };
 
 function toggleLang(){
 telugu=!telugu;
-const L=telugu?TEXT.te:TEXT.en;
-document.getElementById("about-text").innerText=L.about;
-document.getElementById("donation-text").innerText=L.donation;
-document.getElementById("footer-text").innerHTML=L.footer;
-document.getElementById("founders-title").innerText=telugu?"ఆలయ స్థాపకులు":"Temple Founders";
-document.getElementById("f1").innerText=telugu?"స్థాపకుడు":"Founder";
-document.getElementById("f2").innerText=telugu?"స్థాపకురాలు":"Founder";
-document.querySelector(".lang-btn").innerText=telugu?"🌐 English":"🌐 తెలుగు";
+const L=telugu?LANG.te:LANG.en;
+
+for(const k in L){
+  const el=document.getElementById(k.replace("_","-"))||document.getElementById(k);
+  if(el) el.innerHTML=L[k];
+}
+document.querySelector(".lang-btn").innerText=L.btn;
 }
 
 toggleLang();toggleLang();
 
 function getDirections(){
 navigator.geolocation.getCurrentPosition(p=>{
-window.open(
-`https://www.google.com/maps/dir/?api=1&origin=${p.coords.latitude},${p.coords.longitude}&destination=Sri+Nagamma+Temple+Sadum+Andhra+Pradesh`,
-"_blank"
-);
+window.open(`https://www.google.com/maps/dir/?api=1&origin=${p.coords.latitude},${p.coords.longitude}&destination=Sri+Nagamma+Temple+Sadum+Andhra+Pradesh`);
 });
 }
 
