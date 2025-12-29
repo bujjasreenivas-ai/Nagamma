@@ -13,21 +13,6 @@ body{
   color:#3b2f2f;
   overflow-x:hidden;
 }
-
-/* 🌸 FLOWER ANIMATION */
-.flower{
-  position:fixed;
-  top:-40px;
-  font-size:22px;
-  animation:fall linear infinite;
-  z-index:999;
-}
-@keyframes fall{
-  0%{transform:translateY(-40px);opacity:1;}
-  100%{transform:translateY(110vh);opacity:0.7;}
-}
-
-/* ANNOUNCEMENT */
 .announcement{
   background:gold;
   color:#800000;
@@ -35,8 +20,6 @@ body{
   padding:10px;
   font-weight:bold;
 }
-
-/* HEADER */
 header{
   background:#800000;
   color:#fff;
@@ -44,8 +27,6 @@ header{
   text-align:center;
   position:relative;
 }
-
-/* SWASTIK */
 .swastik{
   position:absolute;
   top:20px;
@@ -55,22 +36,30 @@ header{
 .swastik.left{left:20px;}
 .swastik.right{right:20px;}
 
-/* NAGAMMA IMAGE */
 .nagamma-img{
   width:150px;
   height:150px;
   border-radius:50%;
-  object-fit:cover;
   border:4px solid gold;
-  animation:glow 2.5s infinite alternate;
   cursor:pointer;
+  animation:glow 2.5s infinite alternate;
 }
 @keyframes glow{
   from{box-shadow:0 0 10px gold;}
   to{box-shadow:0 0 30px gold;}
 }
 
-/* NAV */
+.lang-btn{
+  background:#d4a017;
+  color:#fff;
+  border:none;
+  padding:6px 14px;
+  border-radius:6px;
+  cursor:pointer;
+  margin-top:10px;
+  font-weight:bold;
+}
+
 nav{
   background:#d4a017;
   display:flex;
@@ -81,13 +70,13 @@ nav a{
   color:#fff;
   padding:10px 15px;
   text-decoration:none;
+  font-weight:bold;
 }
 nav a:hover{background:#b8860b;}
 
 section{padding:30px;}
 h1,h2{color:#800000;}
 
-/* FOUNDERS */
 .founders{
   display:flex;
   flex-wrap:wrap;
@@ -107,20 +96,11 @@ h1,h2{color:#800000;}
   height:140px;
   border-radius:50%;
   border:3px solid gold;
+  cursor:pointer;
 }
 .founder-name{font-weight:bold;color:#800000;}
 .founder-role{font-size:14px;font-weight:bold;}
 
-/* FESTIVE */
-.festive-box{
-  background:#fff3cd;
-  border-left:6px solid #d4a017;
-  padding:15px;
-  margin:15px 0;
-  border-radius:8px;
-}
-
-/* CALENDAR */
 #calendarTable{
   width:100%;
   border-collapse:collapse;
@@ -133,25 +113,10 @@ h1,h2{color:#800000;}
   background:#800000;
   color:#fff;
 }
-.today{background:#c8e6c9 !important;font-weight:bold;}
 .govt{background:#e3f2fd;}
 .pournami{background:#fff9c4;font-weight:bold;}
 .amavasya{background:#ede7f6;font-weight:bold;}
 .temple{background:#fce4ec;font-weight:bold;}
-
-/* CONTACT */
-.contact-buttons a{
-  display:inline-block;
-  margin:6px;
-  padding:10px 16px;
-  border-radius:25px;
-  color:#fff;
-  text-decoration:none;
-  font-weight:bold;
-}
-.call{background:#28a745;}
-.whatsapp{background:#25D366;}
-.email{background:#0072c6;}
 
 iframe{
   width:100%;
@@ -160,58 +125,62 @@ iframe{
   border-radius:10px;
 }
 
-/* FOOTER */
 footer{
   background:#3b2f2f;
   color:#fff;
   text-align:center;
   padding:20px;
 }
-.footer-dharma{
+
+.overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+.overlay img{
+  max-width:90%;
+  max-height:90%;
+  border:6px solid gold;
+  border-radius:12px;
+}
+.overlay span{
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:30px;
+  color:#fff;
+  cursor:pointer;
+}
+.overlay .wm{
+  position:absolute;
+  bottom:30px;
+  font-size:22px;
   color:gold;
   font-weight:bold;
-  margin-top:8px;
-}
-
-.lang-btn{
-  background:#d4a017;
-  color:#fff;
-  border:none;
-  padding:6px 12px;
-  border-radius:5px;
-  cursor:pointer;
-  margin-top:10px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- FLOWERS -->
-<script>
-for(let i=0;i<20;i++){
-  let f=document.createElement("div");
-  f.className="flower";
-  f.innerText="🌸";
-  f.style.left=Math.random()*100+"vw";
-  f.style.animationDuration=(6+Math.random()*6)+"s";
-  document.body.appendChild(f);
-}
-</script>
-
 <div class="announcement" id="announce">
-🔔 Abhishekam every Tuesday, Friday & Sunday at 6:00 AM | Devotees Welcome 🙏
+🔔 Abhishekam every Tuesday, Friday & Sunday at 6:00 AM
 </div>
 
 <header>
   <div class="swastik left">卐</div>
   <div class="swastik right">卐</div>
 
-  <img src="images/nagamma.jpeg" class="nagamma-img">
+  <img src="images/nagamma.jpeg" class="nagamma-img"
+       onclick="openZoom('images/nagamma.jpeg','శ్రీ నాగమ్మ దేవి')">
 
   <h1 id="title">🕉️ Sri Nagamma Temple</h1>
   <p id="subtitle">Abode of Divine Energy & Protection</p>
-  <p style="color:gold;font-weight:bold;">Sanātana Dharma</p>
+  <p style="color:gold;font-weight:bold;" id="dharma">Sanatana Dharma</p>
 
   <button class="lang-btn" onclick="toggleLang()">🌐 తెలుగు</button>
 </header>
@@ -219,115 +188,67 @@ for(let i=0;i<20;i++){
 <nav>
   <a href="#about" id="nav-about">About</a>
   <a href="#founders" id="nav-founders">Founders</a>
-  <a href="#festivals" id="nav-fest">Festivals</a>
-  <a href="#calendar" id="nav-cal">Calendar</a>
-  <a href="#contact" id="nav-contact">Contact</a>
+  <a href="#calendar" id="nav-calendar">Calendar</a>
+  <a href="#location" id="nav-location">Location</a>
 </nav>
 
 <section id="about">
 <h2 id="about-title">About the Temple</h2>
 <p id="about-text">
-Sri Nagamma Temple is a sacred shrine where Goddess Nagamma blesses devotees with protection and prosperity.
+Sri Nagamma Temple is a sacred shrine where Goddess Nagamma blesses devotees.
 </p>
 </section>
 
 <section id="founders">
-<h2>Temple Founders & Contributor</h2>
+<h2 id="founders-title">Temple Founders & Contributor</h2>
 <div class="founders">
   <div class="founder-card">
-    <img src="images/ravishankar.jpeg">
+    <img src="images/ravishankar.jpeg" onclick="openZoom(this.src,'బుజ్జా రవిశంకర్')">
     <div class="founder-name">BUJJA RAVISHANKAR</div>
-    <div class="founder-role">Founder</div>
+    <div class="founder-role" id="f1">Founder</div>
   </div>
   <div class="founder-card">
-    <img src="images/navaneethamma.jpeg">
+    <img src="images/navaneethamma.jpeg" onclick="openZoom(this.src,'బుజ్జా నవనీతమ్మ')">
     <div class="founder-name">BUJJA NAVANEETHAMMA</div>
-    <div class="founder-role">Founder</div>
+    <div class="founder-role" id="f2">Founder</div>
   </div>
   <div class="founder-card">
-    <img src="images/sreenivas.jpeg">
+    <img src="images/sreenivas.jpeg" onclick="openZoom(this.src,'బుజ్జా శ్రీనివాస్')">
     <div class="founder-name">BUJJA SREENIVAS</div>
-    <div class="founder-role">Contributor</div>
+    <div class="founder-role" id="f3">Contributor</div>
   </div>
 </div>
 </section>
 
-<section id="festivals">
-<h2>Festive Announcements</h2>
-<div class="festive-box"><b>Naga Panchami</b> – Special Abhishekam & Milk Pooja</div>
-<div class="festive-box"><b>Karthika Masam</b> – Deepa Aaradhana</div>
-<div class="festive-box"><b>Navaratri</b> – Devi Alankaram & Pooja</div>
-</section>
-
 <section id="calendar">
 <h2 id="cal-title">📅 2026 Temple Calendar</h2>
-
-<label><b>Select Month:</b></label>
-<select id="monthFilter" onchange="renderCalendar()">
-  <option value="all">All</option>
-  <option value="01">Jan</option><option value="02">Feb</option>
-  <option value="03">Mar</option><option value="04">Apr</option>
-  <option value="05">May</option><option value="06">Jun</option>
-  <option value="07">Jul</option><option value="08">Aug</option>
-  <option value="09">Sep</option><option value="10">Oct</option>
-  <option value="11">Nov</option><option value="12">Dec</option>
-</select>
-
-<button onclick="downloadPDF()">📄 Download PDF</button>
-
-<div style="overflow-x:auto;margin-top:15px;">
 <table id="calendarTable">
 <thead>
 <tr><th>Date</th><th>Day</th><th>Event</th></tr>
 </thead>
 <tbody id="calendarBody"></tbody>
 </table>
-</div>
 </section>
 
-<section id="contact">
-<h2>Contact</h2>
-<div class="contact-buttons">
-<a class="call" href="tel:+918328572062">📞 8328572062</a>
-<a class="call" href="tel:+919032278106">📞 9032278106</a><br>
-<a class="whatsapp" href="https://wa.me/918328572062" target="_blank">💬 WhatsApp</a><br>
-<a class="email" href="mailto:bujja.sreenivas@gmail.com">✉️ Sreenivas</a>
-<a class="email" href="mailto:bujjaravishankar@gmail.com">✉️ Ravishankar</a>
-</div>
+<section id="location">
+<h2 id="loc-title">Temple Location</h2>
+<iframe src="https://www.google.com/maps?q=AUMSPHwV4DB1h9Nj7&output=embed"></iframe>
 </section>
 
-<footer>
-© 2025 Sri Nagamma Temple
-<div class="footer-dharma">🕉️ Sanātana Dharma – Eternal Way of Life 🕉️</div>
+<footer id="footer-text">
+© 2025 Sri Nagamma Temple<br>
+🕉️ Sanatana Dharma – Eternal Way of Life
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- ZOOM OVERLAY -->
+<div class="overlay" id="overlay">
+  <span onclick="closeZoom()">✖</span>
+  <img id="zoomImage">
+  <div class="wm" id="zoomWM"></div>
+</div>
+
 <script>
 let telugu=false;
-
-const calendar2026=[
-{date:"2026-01-01",day:"Thu",en:"New Year (AP Holiday)",te:"నూతన సంవత్సరం",type:"govt"},
-{date:"2026-01-14",day:"Wed",en:"Sankranti",te:"సంక్రాంతి",type:"govt"},
-{date:"2026-01-21",day:"Wed",en:"Pournami",te:"పౌర్ణమి",type:"pournami"},
-{date:"2026-01-06",day:"Tue",en:"Amavasya",te:"అమావాస్య",type:"amavasya"},
-{date:"2026-07-29",day:"Wed",en:"Naga Panchami",te:"నాగ పంచమి",type:"temple"},
-{date:"2026-11-09",day:"Mon",en:"Karthika Pournami",te:"కార్తిక పౌర్ణమి",type:"temple"}
-];
-
-function renderCalendar(){
-  const body=document.getElementById("calendarBody");
-  const filter=document.getElementById("monthFilter").value;
-  body.innerHTML="";
-  const today=new Date().toISOString().split("T")[0];
-  calendar2026.forEach(e=>{
-    if(filter!=="all" && e.date.split("-")[1]!==filter) return;
-    const tr=document.createElement("tr");
-    tr.className=e.type;
-    if(e.date===today) tr.classList.add("today");
-    tr.innerHTML=`<td>${e.date}</td><td>${e.day}</td><td>${telugu?e.te:e.en}</td>`;
-    body.appendChild(tr);
-  });
-}
 
 function toggleLang(){
   telugu=!telugu;
@@ -335,24 +256,43 @@ function toggleLang(){
   document.getElementById("subtitle").innerText=telugu?"దైవిక శక్తి మరియు రక్షణ ఆలయం":"Abode of Divine Energy & Protection";
   document.getElementById("about-title").innerText=telugu?"ఆలయం గురించి":"About the Temple";
   document.getElementById("about-text").innerText=telugu?
-  "శ్రీ నాగమ్మ ఆలయం భక్తులకు రక్షణ మరియు శ్రేయస్సు ప్రసాదించే పవిత్ర ఆలయం.":
-  "Sri Nagamma Temple is a sacred shrine where Goddess Nagamma blesses devotees with protection and prosperity.";
-  renderCalendar();
+    "శ్రీ నాగమ్మ ఆలయం భక్తులను ఆశీర్వదించే పవిత్ర ఆలయం.":
+    "Sri Nagamma Temple is a sacred shrine where Goddess Nagamma blesses devotees.";
+  document.getElementById("founders-title").innerText=telugu?"ఆలయ స్థాపకులు & సహకారి":"Temple Founders & Contributor";
+  document.getElementById("f1").innerText=telugu?"స్థాపకుడు":"Founder";
+  document.getElementById("f2").innerText=telugu?"స్థాపకురాలు":"Founder";
+  document.getElementById("f3").innerText=telugu?"సహకారి":"Contributor";
+  document.getElementById("cal-title").innerText=telugu?"📅 2026 ఆలయ క్యాలెండర్":"📅 2026 Temple Calendar";
+  document.getElementById("loc-title").innerText=telugu?"ఆలయ స్థానం":"Temple Location";
 }
 
-function downloadPDF(){
-  const {jsPDF}=window.jspdf;
-  const doc=new jsPDF();
-  doc.text("Sri Nagamma Temple – 2026 Calendar",10,10);
-  let y=20;
+const calendar2026=[
+{date:"2026-01-01",day:"Thu",en:"New Year",te:"నూతన సంవత్సరం",type:"govt"},
+{date:"2026-01-21",day:"Wed",en:"Pournami",te:"పౌర్ణమి",type:"pournami"},
+{date:"2026-02-19",day:"Thu",en:"Amavasya",te:"అమావాస్య",type:"amavasya"},
+{date:"2026-07-29",day:"Wed",en:"Naga Panchami",te:"నాగ పంచమి",type:"temple"}
+];
+
+function renderCalendar(){
+  const body=document.getElementById("calendarBody");
+  body.innerHTML="";
   calendar2026.forEach(e=>{
-    doc.text(`${e.date} - ${e.en}`,10,y);
-    y+=8;
+    const tr=document.createElement("tr");
+    tr.className=e.type;
+    tr.innerHTML=`<td>${e.date}</td><td>${e.day}</td><td>${telugu?e.te:e.en}</td>`;
+    body.appendChild(tr);
   });
-  doc.save("Sri_Nagamma_Temple_2026_Calendar.pdf");
 }
-
 renderCalendar();
+
+function openZoom(src,name){
+  document.getElementById("zoomImage").src=src;
+  document.getElementById("zoomWM").innerText=name;
+  document.getElementById("overlay").style.display="flex";
+}
+function closeZoom(){
+  document.getElementById("overlay").style.display="none";
+}
 </script>
 
 </body>
