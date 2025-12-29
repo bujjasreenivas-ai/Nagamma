@@ -14,7 +14,7 @@ body{
   overflow-x:hidden;
 }
 
-/* 🌼🌸 GOLD & BLUE FLOWERS */
+/* FLOWERS */
 .flower{
   position:fixed;
   top:-40px;
@@ -25,7 +25,6 @@ body{
 }
 .gold{color:gold;}
 .blue{color:#4fc3f7;}
-
 @keyframes fall{
   0%{transform:translateY(-40px);opacity:1;}
   100%{transform:translateY(110vh);opacity:0.6;}
@@ -56,6 +55,7 @@ header{
   cursor:pointer;
 }
 
+/* BUTTON */
 .lang-btn{
   background:#d4a017;
   color:#fff;
@@ -124,6 +124,15 @@ th{
 .pournami{background:#fff9c4;font-weight:bold;}
 .amavasya{background:#ede7f6;font-weight:bold;}
 
+/* DONATION */
+.donation{
+  background:#fff3cd;
+  border-left:6px solid #d4a017;
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+}
+
 /* CONTACT */
 .contact a{
   display:inline-block;
@@ -144,6 +153,18 @@ iframe{
   border:0;
   border-radius:10px;
 }
+
+.map-buttons a{
+  display:inline-block;
+  margin:8px;
+  padding:10px 18px;
+  border-radius:25px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:bold;
+}
+.map-view{background:#1a73e8;}
+.map-dir{background:#0f9d58;}
 
 footer{
   background:#3b2f2f;
@@ -180,7 +201,7 @@ footer{
 
 <body>
 
-<!-- 🌼🌸 FLOWERS SCRIPT -->
+<!-- FLOWERS -->
 <script>
 for(let i=0;i<35;i++){
   const f=document.createElement("div");
@@ -192,12 +213,20 @@ for(let i=0;i<35;i++){
 }
 </script>
 
+<!-- OM SOUND -->
+<audio id="omSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_50e6e5b88f.mp3"></audio>
+<script>
+document.addEventListener("click",()=>{
+  const a=document.getElementById("omSound");
+  if(a.paused) a.play().catch(()=>{});
+},{once:true});
+</script>
+
 <header>
   <div class="swastik left">卐</div>
   <div class="swastik right">卐</div>
 
-  <img src="images/nagamma.jpeg" class="nagamma-img"
-       onclick="openZoom(this.src)">
+  <img src="images/nagamma.jpeg" class="nagamma-img" onclick="openZoom(this.src)">
 
   <h1 id="title">🕉️ Sri Nagamma Temple</h1>
   <p id="subtitle">Abode of Divine Energy & Protection</p>
@@ -206,52 +235,49 @@ for(let i=0;i<35;i++){
 </header>
 
 <nav>
-  <a href="#about">About</a>
-  <a href="#founders">Founders</a>
-  <a href="#calendar">Calendar</a>
-  <a href="#location">Location</a>
-  <a href="#contact">Contact</a>
+  <a id="nav-about" href="#about">About</a>
+  <a id="nav-founders" href="#founders">Founders</a>
+  <a id="nav-calendar" href="#calendar">Calendar</a>
+  <a href="#donation" id="nav-donation">Donation</a>
+  <a href="#dosha" id="nav-dosha">Sarpa Dosha</a>
+  <a id="nav-location" href="#location">Location</a>
+  <a id="nav-contact" href="#contact">Contact</a>
 </nav>
 
 <section id="about">
 <h2 id="about-title">About Goddess Nagamma</h2>
-<p id="about-text">
-Goddess Nagamma is revered as the divine Serpent Mother and supreme guardian of life, fertility, health, land, and lineage. Her worship removes Sarpa Dosha and brings peace, protection, and prosperity—especially on Pournami and Amavasya.
-</p>
+<p id="about-text"></p>
 </section>
 
-<section id="founders">
-<h2 id="founders-title">Temple Founders & Contributor</h2>
-<div class="founders">
-  <div class="founder-card">
-    <img src="images/ravishankar.jpeg" onclick="openZoom(this.src)">
-    <b>BUJJA RAVISHANKAR</b><br><span id="f1">Founder</span>
-  </div>
-  <div class="founder-card">
-    <img src="images/navaneethamma.jpeg" onclick="openZoom(this.src)">
-    <b>BUJJA NAVANEETHAMMA</b><br><span id="f2">Founder</span>
-  </div>
-  <div class="founder-card">
-    <img src="images/sreenivas.jpeg" onclick="openZoom(this.src)">
-    <b>BUJJA SREENIVAS</b><br><span id="f3">Contributor</span>
-  </div>
-</div>
+<section id="donation">
+<h2 id="donation-title">Donation</h2>
+<div class="donation" id="donation-text"></div>
+<p><b>UPI:</b> <span onclick="navigator.clipboard.writeText('8328572062@ybl')">8328572062@ybl 📋</span></p>
+<img src="images/upi-qr.jpeg" width="180">
+</section>
+
+<section id="dosha">
+<h2 id="dosha-title">Sarpa Dosha</h2>
+<p id="dosha-text"></p>
 </section>
 
 <section id="calendar">
 <h2 id="calendar-title">📅 2026 Temple Calendar</h2>
+<button onclick="window.print()">🖨️ Print Calendar</button>
 <table>
 <tr><th>Date</th><th>Day</th><th>Event</th></tr>
 <tbody id="calendarBody"></tbody>
 </table>
 </section>
 
-<!-- ✅ FIXED GOOGLE MAPS (NO ERROR) -->
 <section id="location">
 <h2 id="loc-title">Temple Location</h2>
-<iframe
-src="https://maps.google.com/maps?q=Sri%20Nagamma%20Temple%20Sadum%20Andhra%20Pradesh&z=15&output=embed">
-</iframe>
+<iframe src="https://maps.google.com/maps?q=Sri%20Nagamma%20Temple%20Sadum%20Andhra%20Pradesh&z=15&output=embed"></iframe>
+<div class="map-buttons">
+<a class="map-view" target="_blank"
+href="https://www.google.com/maps/search/?api=1&query=Sri+Nagamma+Temple+Sadum+Andhra+Pradesh">📍 View in Maps</a>
+<a class="map-dir" href="#" onclick="getDirections()">🧭 Get Directions</a>
+</div>
 </section>
 
 <section id="contact">
@@ -261,14 +287,10 @@ src="https://maps.google.com/maps?q=Sri%20Nagamma%20Temple%20Sadum%20Andhra%20Pr
 <a class="call" href="tel:+919032278106">📞 9032278106</a><br>
 <a class="whatsapp" href="https://wa.me/918328572062">💬 WhatsApp</a><br>
 <a class="email" href="mailto:bujja.sreenivas@gmail.com">✉️ Sreenivas</a>
-<a class="email" href="mailto:bujjaravishankar@gmail.com">✉️ Ravishankar</a>
 </div>
 </section>
 
-<footer id="footer-text">
-© 2025 Sri Nagamma Temple<br>
-🕉️ Sanatana Dharma – Eternal Way of Life
-</footer>
+<footer id="footer-text"></footer>
 
 <div class="overlay" id="overlay">
 <span onclick="closeZoom()">✖</span>
@@ -278,11 +300,25 @@ src="https://maps.google.com/maps?q=Sri%20Nagamma%20Temple%20Sadum%20Andhra%20Pr
 <script>
 let telugu=false;
 
+const TEXT={
+en:{
+about:"Goddess Nagamma is the divine Serpent Mother protecting life, health, fertility, land and lineage. Worship removes Sarpa Dosha.",
+donation:"Support temple rituals, abhishekam and annadanam through your generous donation.",
+dosha:"Sarpa Dosha is caused due to Nāga imbalance. Worship of Nagamma Devi grants relief and peace.",
+footer:"© 2025 Sri Nagamma Temple<br>🕉️ Sanatana Dharma – Eternal Way of Life"
+},
+te:{
+about:"శ్రీ నాగమ్మ దేవి జీవితం, ఆరోగ్యం, సంతానం, భూమి మరియు వంశాన్ని రక్షించే పరమ నాగమాత.",
+donation:"అభిషేకాలు మరియు అన్నదాన సేవలకు మీ విరాళం అందించండి.",
+dosha:"సర్ప దోషం నాగ తత్త్వ అసమతుల్యత వల్ల ఏర్పడుతుంది. నాగమ్మ దేవి ఆరాధన శాంతిని ఇస్తుంది.",
+footer:"© 2025 శ్రీ నాగమ్మ ఆలయం<br>🕉️ సనాతన ధర్మం – శాశ్వత జీవన మార్గం"
+}
+};
+
 const calendar2026=[
-{d:"2026-01-01",day:"Thu",en:"New Year (Govt Holiday)",te:"నూతన సంవత్సరం",c:"govt"},
+{d:"2026-01-01",day:"Thu",en:"New Year",te:"నూతన సంవత్సరం",c:"govt"},
 {d:"2026-01-21",day:"Wed",en:"Pournami",te:"పౌర్ణమి",c:"pournami"},
-{d:"2026-02-19",day:"Thu",en:"Amavasya",te:"అమావాస్య",c:"amavasya"},
-{d:"2026-08-15",day:"Sat",en:"Independence Day",te:"స్వాతంత్ర్య దినోత్సవం",c:"govt"}
+{d:"2026-02-19",day:"Thu",en:"Amavasya",te:"అమావాస్య",c:"amavasya"}
 ];
 
 function renderCalendar(){
@@ -293,12 +329,25 @@ body.innerHTML+=`<tr class="${e.c}">
 <td>${e.d}</td><td>${e.day}</td><td>${telugu?e.te:e.en}</td></tr>`;
 });
 }
-renderCalendar();
 
 function toggleLang(){
 telugu=!telugu;
+const L=telugu?TEXT.te:TEXT.en;
+document.getElementById("about-text").innerText=L.about;
+document.getElementById("donation-text").innerText=L.donation;
+document.getElementById("dosha-text").innerText=L.dosha;
+document.getElementById("footer-text").innerHTML=L.footer;
 document.querySelector(".lang-btn").innerText=telugu?"🌐 English":"🌐 తెలుగు";
 renderCalendar();
+}
+
+renderCalendar();
+toggleLang();toggleLang();
+
+function getDirections(){
+navigator.geolocation.getCurrentPosition(p=>{
+window.open(`https://www.google.com/maps/dir/?api=1&origin=${p.coords.latitude},${p.coords.longitude}&destination=Sri+Nagamma+Temple+Sadum+Andhra+Pradesh`);
+});
 }
 
 function openZoom(src){
