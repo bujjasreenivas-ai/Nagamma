@@ -11,6 +11,24 @@ body{
   margin:0;
   background:#fffaf3;
   color:#3b2f2f;
+  overflow-x:hidden;
+}
+
+/* 🌼🌸 GOLD & BLUE FLOWERS */
+.flower{
+  position:fixed;
+  top:-40px;
+  font-size:22px;
+  animation:fall linear infinite;
+  z-index:999;
+  pointer-events:none;
+}
+.gold{color:gold;}
+.blue{color:#4fc3f7;}
+
+@keyframes fall{
+  0%{transform:translateY(-40px);opacity:1;}
+  100%{transform:translateY(110vh);opacity:0.6;}
 }
 
 /* HEADER */
@@ -162,12 +180,24 @@ footer{
 
 <body>
 
+<!-- 🌼🌸 FLOWERS SCRIPT -->
+<script>
+for(let i=0;i<35;i++){
+  const f=document.createElement("div");
+  f.className="flower "+(Math.random()>0.5?"gold":"blue");
+  f.innerText=Math.random()>0.5?"🌼":"💠";
+  f.style.left=Math.random()*100+"vw";
+  f.style.animationDuration=(6+Math.random()*6)+"s";
+  document.body.appendChild(f);
+}
+</script>
+
 <header>
   <div class="swastik left">卐</div>
   <div class="swastik right">卐</div>
 
   <img src="images/nagamma.jpeg" class="nagamma-img"
-       onclick="openZoom(this.src,'శ్రీ నాగమ్మ దేవి')">
+       onclick="openZoom(this.src)">
 
   <h1 id="title">🕉️ Sri Nagamma Temple</h1>
   <p id="subtitle">Abode of Divine Energy & Protection</p>
@@ -183,37 +213,31 @@ footer{
   <a href="#contact">Contact</a>
 </nav>
 
-<!-- ABOUT -->
 <section id="about">
 <h2 id="about-title">About Goddess Nagamma</h2>
 <p id="about-text">
-Goddess Nagamma is revered as the divine Serpent Mother and the supreme guardian of life, fertility, health, land, and lineage. She represents the sacred Nāga tattva, symbolizing protection, justice, and ancestral balance. Devotees believe that sincere worship of Nagamma Devi removes Sarpa Dosha, grants progeny, protects families from unseen afflictions, and bestows prosperity and harmony. Her grace is especially powerful on Pournami and Amavasya.
+Goddess Nagamma is revered as the divine Serpent Mother and supreme guardian of life, fertility, health, land, and lineage. Her worship removes Sarpa Dosha and brings peace, protection, and prosperity—especially on Pournami and Amavasya.
 </p>
 </section>
 
-<!-- FOUNDERS -->
 <section id="founders">
 <h2 id="founders-title">Temple Founders & Contributor</h2>
 <div class="founders">
   <div class="founder-card">
     <img src="images/ravishankar.jpeg" onclick="openZoom(this.src)">
-    <b>BUJJA RAVISHANKAR</b><br>
-    <span id="f1">Founder</span>
+    <b>BUJJA RAVISHANKAR</b><br><span id="f1">Founder</span>
   </div>
   <div class="founder-card">
     <img src="images/navaneethamma.jpeg" onclick="openZoom(this.src)">
-    <b>BUJJA NAVANEETHAMMA</b><br>
-    <span id="f2">Founder</span>
+    <b>BUJJA NAVANEETHAMMA</b><br><span id="f2">Founder</span>
   </div>
   <div class="founder-card">
     <img src="images/sreenivas.jpeg" onclick="openZoom(this.src)">
-    <b>BUJJA SREENIVAS</b><br>
-    <span id="f3">Contributor</span>
+    <b>BUJJA SREENIVAS</b><br><span id="f3">Contributor</span>
   </div>
 </div>
 </section>
 
-<!-- CALENDAR -->
 <section id="calendar">
 <h2 id="calendar-title">📅 2026 Temple Calendar</h2>
 <table>
@@ -222,13 +246,14 @@ Goddess Nagamma is revered as the divine Serpent Mother and the supreme guardian
 </table>
 </section>
 
-<!-- LOCATION -->
+<!-- ✅ FIXED GOOGLE MAPS (NO ERROR) -->
 <section id="location">
 <h2 id="loc-title">Temple Location</h2>
-<iframe src="https://www.google.com/maps?q=Sri+Nagamma+Temple+Sadum+Andhra+Pradesh&output=embed"></iframe>
+<iframe
+src="https://maps.google.com/maps?q=Sri%20Nagamma%20Temple%20Sadum%20Andhra%20Pradesh&z=15&output=embed">
+</iframe>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
 <h2 id="contact-title">Contact</h2>
 <div class="contact">
@@ -245,7 +270,6 @@ Goddess Nagamma is revered as the divine Serpent Mother and the supreme guardian
 🕉️ Sanatana Dharma – Eternal Way of Life
 </footer>
 
-<!-- ZOOM -->
 <div class="overlay" id="overlay">
 <span onclick="closeZoom()">✖</span>
 <img id="zoomImage">
@@ -262,53 +286,27 @@ const calendar2026=[
 ];
 
 function renderCalendar(){
-  const body=document.getElementById("calendarBody");
-  body.innerHTML="";
-  calendar2026.forEach(e=>{
-    body.innerHTML+=`
-    <tr class="${e.c}">
-      <td>${e.d}</td>
-      <td>${e.day}</td>
-      <td>${telugu?e.te:e.en}</td>
-    </tr>`;
-  });
+const body=document.getElementById("calendarBody");
+body.innerHTML="";
+calendar2026.forEach(e=>{
+body.innerHTML+=`<tr class="${e.c}">
+<td>${e.d}</td><td>${e.day}</td><td>${telugu?e.te:e.en}</td></tr>`;
+});
 }
 renderCalendar();
 
 function toggleLang(){
-  telugu=!telugu;
-
-  document.getElementById("title").innerText = telugu ? "🕉️ శ్రీ నాగమ్మ ఆలయం" : "🕉️ Sri Nagamma Temple";
-  document.getElementById("subtitle").innerText = telugu ? "దైవిక శక్తి మరియు రక్షణ ఆలయం" : "Abode of Divine Energy & Protection";
-
-  document.getElementById("about-title").innerText = telugu ? "శ్రీ నాగమ్మ దేవి గురించి" : "About Goddess Nagamma";
-  document.getElementById("about-text").innerText = telugu
-    ? "శ్రీ నాగమ్మ దేవి జీవితం, సంతానం, ఆరోగ్యం, భూమి మరియు వంశ పరంపరను రక్షించే పరమ నాగమాత. ఆమె నాగ తత్త్వానికి ప్రతిరూపం. నాగమ్మ దేవిని భక్తితో ఆరాధిస్తే సర్ప దోష నివారణ కలిగి, సంతాన ప్రాప్తి, కుటుంబ రక్షణ మరియు ఐశ్వర్యం లభిస్తాయని విశ్వాసం. పౌర్ణమి మరియు అమావాస్య రోజుల్లో ఆమె కృప అత్యంత ప్రభావవంతంగా ఉంటుంది."
-    : "Goddess Nagamma is revered as the divine Serpent Mother and the supreme guardian of life, fertility, health, land, and lineage. She represents the sacred Nāga tattva, symbolizing protection, justice, and ancestral balance. Devotees believe that sincere worship removes Sarpa Dosha and grants prosperity. Her grace is especially powerful on Pournami and Amavasya.";
-
-  document.getElementById("founders-title").innerText = telugu ? "ఆలయ స్థాపకులు & సహకారి" : "Temple Founders & Contributor";
-  document.getElementById("f1").innerText = telugu ? "స్థాపకుడు" : "Founder";
-  document.getElementById("f2").innerText = telugu ? "స్థాపకురాలు" : "Founder";
-  document.getElementById("f3").innerText = telugu ? "సహకారి" : "Contributor";
-
-  document.getElementById("calendar-title").innerText = telugu ? "📅 2026 ఆలయ క్యాలెండర్" : "📅 2026 Temple Calendar";
-  document.getElementById("loc-title").innerText = telugu ? "ఆలయ స్థానం" : "Temple Location";
-  document.getElementById("contact-title").innerText = telugu ? "సంప్రదించండి" : "Contact";
-
-  document.getElementById("footer-text").innerHTML = telugu
-    ? "© 2025 శ్రీ నాగమ్మ ఆలయం<br>🕉️ సనాతన ధర్మం – శాశ్వత జీవన మార్గం"
-    : "© 2025 Sri Nagamma Temple<br>🕉️ Sanatana Dharma – Eternal Way of Life";
-
-  document.querySelector(".lang-btn").innerText = telugu ? "🌐 English" : "🌐 తెలుగు";
-  renderCalendar();
+telugu=!telugu;
+document.querySelector(".lang-btn").innerText=telugu?"🌐 English":"🌐 తెలుగు";
+renderCalendar();
 }
 
 function openZoom(src){
-  document.getElementById("zoomImage").src=src;
-  document.getElementById("overlay").style.display="flex";
+document.getElementById("zoomImage").src=src;
+document.getElementById("overlay").style.display="flex";
 }
 function closeZoom(){
-  document.getElementById("overlay").style.display="none";
+document.getElementById("overlay").style.display="none";
 }
 </script>
 
