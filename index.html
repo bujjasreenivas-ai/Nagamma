@@ -44,6 +44,7 @@ header{
   cursor:pointer;
 }
 
+/* NAV */
 nav{
   background:#d4a017;
   display:flex;
@@ -60,6 +61,7 @@ nav a:hover{background:#b8860b;}
 section{padding:30px;}
 h1,h2{color:#800000;}
 
+/* FOUNDERS */
 .founders{
   display:flex;
   flex-wrap:wrap;
@@ -74,6 +76,7 @@ h1,h2{color:#800000;}
   text-align:center;
 }
 
+/* IMAGE + WATERMARK */
 .image-wrap{
   position:relative;
   display:inline-block;
@@ -84,7 +87,9 @@ h1,h2{color:#800000;}
   border-radius:50%;
   border:3px solid gold;
   cursor:pointer;
+  transition:transform .3s;
 }
+.image-wrap img:hover{transform:scale(1.05);}
 .watermark{
   position:absolute;
   bottom:8px;
@@ -96,9 +101,11 @@ h1,h2{color:#800000;}
   text-shadow:1px 1px 4px black;
 }
 
+/* CALENDAR */
 #calendarTable{
   width:100%;
   border-collapse:collapse;
+  margin-top:15px;
 }
 #calendarTable th,#calendarTable td{
   border:1px solid #ccc;
@@ -114,6 +121,7 @@ h1,h2{color:#800000;}
 .temple{background:#fce4ec;font-weight:bold;}
 .today{background:#c8e6c9 !important;font-weight:bold;}
 
+/* CONTACT */
 .contact-buttons a{
   display:inline-block;
   margin:6px;
@@ -142,7 +150,6 @@ footer{
   padding:20px;
 }
 .footer-dharma{color:gold;font-weight:bold;}
-
 .lang-btn{
   background:#d4a017;
   color:#fff;
@@ -150,8 +157,10 @@ footer{
   padding:6px 12px;
   border-radius:5px;
   cursor:pointer;
+  margin-top:10px;
 }
 
+/* ZOOM OVERLAY */
 .overlay{
   display:none;
   position:fixed;
@@ -165,6 +174,7 @@ footer{
   max-width:90%;
   max-height:90%;
   border:6px solid gold;
+  border-radius:12px;
 }
 .overlay span{
   position:absolute;
@@ -180,6 +190,7 @@ footer{
   font-size:22px;
   color:gold;
   font-weight:bold;
+  text-shadow:2px 2px 6px black;
 }
 </style>
 </head>
@@ -213,40 +224,130 @@ footer{
   <a id="nav-contact" href="#contact">Contact</a>
 </nav>
 
+<section id="about">
+  <h2 id="about-title">About the Temple</h2>
+  <p id="about-text">
+    Sri Nagamma Temple is a sacred shrine where Goddess Nagamma blesses devotees with protection and prosperity.
+  </p>
+</section>
+
+<section id="founders">
+  <h2 id="founders-title">Temple Founders & Contributor</h2>
+
+  <div class="founders">
+    <div class="founder-card">
+      <div class="image-wrap">
+        <img src="images/ravishankar.jpeg"
+             onclick="openZoom(this.src,'బుజ్జా రవిశంకర్')">
+        <div class="watermark">బుజ్జా రవిశంకర్</div>
+      </div>
+      <b>BUJJA RAVISHANKAR</b><br>Founder
+    </div>
+
+    <div class="founder-card">
+      <div class="image-wrap">
+        <img src="images/navaneethamma.jpeg"
+             onclick="openZoom(this.src,'బుజ్జా నవనీతమ్మ')">
+        <div class="watermark">బుజ్జా నవనీతమ్మ</div>
+      </div>
+      <b>BUJJA NAVANEETHAMMA</b><br>Founder
+    </div>
+
+    <div class="founder-card">
+      <div class="image-wrap">
+        <img src="images/sreenivas.jpeg"
+             onclick="openZoom(this.src,'బుజ్జా శ్రీనివాస్')">
+        <div class="watermark">బుజ్జా శ్రీనివాస్</div>
+      </div>
+      <b>BUJJA SREENIVAS</b><br>Contributor
+    </div>
+  </div>
+</section>
+
 <section id="calendar">
-<h2 id="calendar-title">📅 2026 Temple Calendar</h2>
+  <h2 id="calendar-title">📅 2026 Temple Calendar</h2>
 
-<select id="monthFilter" onchange="renderCalendar()">
-<option value="all">All Months</option>
-<option value="01">January</option><option value="02">February</option>
-<option value="03">March</option><option value="04">April</option>
-<option value="05">May</option><option value="06">June</option>
-<option value="07">July</option><option value="08">August</option>
-<option value="09">September</option><option value="10">October</option>
-<option value="11">November</option><option value="12">December</option>
-</select>
+  <select id="monthFilter" onchange="renderCalendar()">
+    <option value="all">All Months</option>
+    <option value="01">January</option><option value="02">February</option>
+    <option value="03">March</option><option value="04">April</option>
+    <option value="05">May</option><option value="06">June</option>
+    <option value="07">July</option><option value="08">August</option>
+    <option value="09">September</option><option value="10">October</option>
+    <option value="11">November</option><option value="12">December</option>
+  </select>
 
-<table id="calendarTable">
-<thead><tr><th>Date</th><th>Day</th><th>Event</th></tr></thead>
-<tbody id="calendarBody"></tbody>
-</table>
+  <table id="calendarTable">
+    <thead>
+      <tr><th>Date</th><th>Day</th><th>Event</th></tr>
+    </thead>
+    <tbody id="calendarBody"></tbody>
+  </table>
 
-<p>🟦 Govt Holiday | 🌕 Pournami | 🌑 Amavasya | 🐍 Temple Special</p>
+  <p>🟦 Govt Holiday | 🌕 Pournami | 🌑 Amavasya | 🐍 Temple Special</p>
+</section>
+
+<section id="location">
+  <h2 id="location-title">Temple Location</h2>
+  <iframe src="https://www.google.com/maps?q=FVQC+VJR+Nagalamma+Temple,+Thimmanayana+Palli,+Sodum,+Andhra+Pradesh&output=embed"></iframe>
+</section>
+
+<section id="donate">
+  <h2 id="donate-title">Donations</h2>
+  <a class="donate-btn" href="upi://pay?pa=8328572062@ybl&pn=Sri%20Nagamma%20Temple&cu=INR">
+    💰 Donate via UPI
+  </a>
+</section>
+
+<section id="contact">
+  <h2 id="contact-title">Contact</h2>
+  <div class="contact-buttons">
+    <a class="call" href="tel:+918328572062">📞 8328572062</a>
+    <a class="call" href="tel:+919032278106">📞 9032278106</a><br>
+    <a class="whatsapp" href="https://wa.me/918328572062" target="_blank">💬 WhatsApp</a><br>
+    <a class="email" href="mailto:bujja.sreenivas@gmail.com">✉️ Sreenivas</a>
+    <a class="email" href="mailto:bujjaravishankar@gmail.com">✉️ Ravishankar</a>
+  </div>
 </section>
 
 <footer>
-© 2025 Sri Nagamma Temple
-<div class="footer-dharma">🕉️ Sanātana Dharma – Eternal Way of Life 🕉️</div>
+  © 2025 Sri Nagamma Temple
+  <div class="footer-dharma">🕉️ Sanātana Dharma – Eternal Way of Life 🕉️</div>
 </footer>
 
 <div class="overlay" id="overlay">
-<span onclick="closeZoom()">✖</span>
-<img id="zoomImage">
-<div class="wm" id="zoomWM"></div>
+  <span onclick="closeZoom()">✖</span>
+  <img id="zoomImage">
+  <div class="wm" id="zoomWM"></div>
 </div>
 
 <script>
 let telugu=false;
+
+const textMap={
+  title:{en:"🕉️ Sri Nagamma Temple",te:"🕉️ శ్రీ నాగమ్మ ఆలయం"},
+  subtitle:{en:"Abode of Divine Energy & Protection",te:"దైవిక శక్తి మరియు రక్షణ ఆలయం"},
+  "nav-about":{en:"About",te:"గురించి"},
+  "nav-founders":{en:"Founders",te:"స్థాపకులు"},
+  "nav-calendar":{en:"Calendar",te:"క్యాలెండర్"},
+  "nav-location":{en:"Location",te:"స్థానం"},
+  "nav-donate":{en:"Donations",te:"దానం"},
+  "nav-contact":{en:"Contact",te:"సంప్రదించండి"},
+  "about-title":{en:"About the Temple",te:"ఆలయం గురించి"},
+  "about-text":{
+    en:"Sri Nagamma Temple is a sacred shrine where Goddess Nagamma blesses devotees with protection and prosperity.",
+    te:"శ్రీ నాగమ్మ ఆలయం భక్తులకు రక్షణ మరియు శ్రేయస్సును ప్రసాదించే పవిత్ర ఆలయం."
+  },
+  "founders-title":{en:"Temple Founders & Contributor",te:"ఆలయ స్థాపకులు & సహకారులు"},
+  "calendar-title":{en:"📅 2026 Temple Calendar",te:"📅 2026 ఆలయ క్యాలెండర్"},
+  "location-title":{en:"Temple Location",te:"ఆలయ స్థానం"},
+  "donate-title":{en:"Donations",te:"దానం"},
+  "contact-title":{en:"Contact",te:"సంప్రదించండి"},
+  "announcement-text":{
+    en:"🔔 Abhishekam every Tuesday, Friday & Sunday at 6:00 AM | Devotees Welcome 🙏",
+    te:"🔔 ప్రతి మంగళవారం, శుక్రవారం మరియు ఆదివారం ఉదయం 6 గంటలకు అభిషేకం | భక్తులకు స్వాగతం 🙏"
+  }
+};
 
 const calendar2026=[
 {date:"2026-01-01",day:"Thu",en:"New Year’s Day",te:"నూతన సంవత్సరం",type:"govt"},
@@ -268,6 +369,10 @@ const calendar2026=[
 
 function toggleLang(){
   telugu=!telugu;
+  for(const id in textMap){
+    const el=document.getElementById(id);
+    if(el) el.innerText=telugu?textMap[id].te:textMap[id].en;
+  }
   document.querySelector(".lang-btn").innerText=telugu?"🌐 English":"🌐 తెలుగు";
   renderCalendar();
 }
